@@ -30,7 +30,7 @@ permalink: airplane_sun
          <option value="PHNL">Arrival Airport</option>
   </select>
 <button type="button" id="go-button">Go</button>
-<canvas id="globe-canvas" width="300" height="200"></canvas>
+<canvas id="globe-canvas" width="500" height="200"></canvas>
 
 </body>
 

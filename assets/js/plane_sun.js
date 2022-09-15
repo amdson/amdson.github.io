@@ -576,12 +576,12 @@ class SunPath {
 	}
 }
 
-function projVec(ctx, vec, radius=2, fill=false) {
+function projVecCircle(ctx, vec, radius=2, fill=false) {
 	var svec = vec.clone().multiplyScalar(75);
 	svec.z = -svec.z
-	svec.add(new Vector3(150, 0, 100)); 
+	svec.add(new Vector3(150, 150, 100)); 
 	// console.log("scaled vec", svec); 
-	var vx = svec.x, vy = svec.z; 
+	var vx = svec.y, vy = svec.z; 
 	ctx.beginPath();
 	ctx.arc(vx, vy, radius, 0, 2 * Math.PI);
 	ctx.stroke(); 
@@ -644,19 +644,63 @@ $(document).ready(function () {
 			var north_pole = from_coords(PI/2, 0);
 			var south_pole = from_coords(-PI/2, 0); 
 			ctx.fillStyle = "green";
-			projVec(ctx, north_pole, 2, true);
-			projVec(ctx, south_pole, 2, true); 
+			projVecCircle(ctx, north_pole, 2, true);
+			projVecCircle(ctx, south_pole, 2, true); 
+			// for (acr in markers) {
+			// 	var f1 = markers[acr];
+			// 	var lat1 = parseFloat(f1[3]),
+			// 	long1 = parseFloat(f1[4]);
+			// 	var v = from_coords_deg(lat1, long1); 
+			// 	projVec(ctx, v, 2, true);
+			// }
+
+			left_sunlight = [];
+			right_sunlight = []; 
+
 			ctx.strokeStyle = "black";
-			projVec(ctx, globe_center, 75); 
+			projVecCircle(ctx, globe_center, 75); 
 			for (var i = 0; i <= 100; i++) {
 				var t = i / 100; 
 				var sun_coord = sun_path.interp(t); //Normalized vector. 
 				ctx.fillStyle = "yellow";
-				projVec(ctx, sun_coord, 0.7, true); 
+				projVecCircle(ctx, sun_coord, 0.7, true); 
 				var flight_coord = flight_path.interp(t); 
 				ctx.fillStyle = "blue";
-				projVec(ctx, flight_coord, 2, true); 
+				projVecCircle(ctx, flight_coord, 2, true); 
+
+				var pos_sunlight = 1;
+				if(flight_coord.dot(sun_coord) < 0) {pos_sunlight = 0;} //Ignore atmospheric effects. )
+				
+				var window_dir = flight_path.interp_w(t);
+				var w_sun = window_dir.dot(sun_coord);  
+				right_sunlight.push(Math.max(w_sun, 0)*pos_sunlight); 
+				left_sunlight.push(Math.max(-w_sun, 0)*pos_sunlight); 
 			}
+			// //x-axis
+			// ctx.beginPath();
+			// ctx.moveTo(295, 150);
+			// ctx.lineTo(500, 150); 
+			// ctx.stroke(); 
+			// //y-axis
+			// ctx.beginPath();
+			// ctx.moveTo(300, 155);
+			// ctx.lineTo(300, 0); 
+			// ctx.stroke(); 
+
+			// ctx.beginPath();
+			// ctx.moveTo(300, 150-right_sunlight[0]);
+			// for (var i = 1; i < right_sunlight.length; i++) {
+			// 	var s1 = right_sunlight[i];
+			// 	ctx.lineTo(2*i+300, 150-s1);
+			// }
+			// ctx.stroke();
+			// ctx.beginPath();
+			// ctx.moveTo(300, 150-left_sunlight[0]);
+			// for (var i = 1; i < left_sunlight.length; i++) {
+			// 	var s1 = left_sunlight[i];
+			// 	ctx.lineTo(2*i+300, 150-s1);
+			// }
+			// ctx.stroke();
 		}
 	});
 });
