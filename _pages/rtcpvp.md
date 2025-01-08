@@ -9,12 +9,12 @@ permalink: rtcpvp
     <script>
         let markers = {{ site.data.gad | jsonify}};
      </script>
-     <script type="module" crossorigin src="/assets/js/index-DWQiP13g.js"></script>
+     <script type="module" crossorigin src="/assets/js/rtcpvp_index.js"></script>
 </head>
 <body>
     <canvas id="canvas" width="500" height="500"></canvas>
     <button id="startGameButton" disabled> Begin </button>
-    
+
     <h2>Start a game</h2>
     <button id="callButton">Create Call (offer)</button>
 
