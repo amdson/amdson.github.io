@@ -13,14 +13,11 @@ permalink: rtcpvp
 </head>
 <body>
     <canvas id="canvas" width="500" height="500"></canvas>
-    <button id="startGameButton" disabled> Begin </button>
 
-    <h2>Start a game</h2>
+    <button id="startGameButton">Start Local</button>
     <button id="callButton">Create Call (offer)</button>
-
-    <h2>Join a game</h2>
     <input id="callInput" />
-    <button id="answerButton">Answer</button>
+    <button id="answerButton">Join a Game</button>
   </body>
 
 </html>
