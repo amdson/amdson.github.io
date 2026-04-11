@@ -1,0 +1,15 @@
+{
+  "name": "crystal_sim",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "crystal_sim_bg.wasm",
+    "crystal_sim.js",
+    "crystal_sim.d.ts"
+  ],
+  "main": "crystal_sim.js",
+  "types": "crystal_sim.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
