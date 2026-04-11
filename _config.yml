@@ -27,6 +27,7 @@ markdown: kramdown
 theme: minima
 
 include: [_pages]
+exclude: [docs/current_physics.md, docs/pkg/README.md]
 
 defaults:
   -
