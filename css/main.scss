@@ -37,3 +37,40 @@ $on-laptop:        800px;
 
 // Import partials from the `minima` theme.
 @import "minima";
+
+// Projects dropdown
+.dropdown {
+  display: inline-block;
+  position: relative;
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: $background-color;
+    border: 1px solid $grey-color-light;
+    border-radius: 3px;
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+    min-width: 200px;
+    z-index: 100;
+
+    li a {
+      display: block;
+      padding: 5px 15px;
+      color: $text-color;
+      white-space: nowrap;
+
+      &:hover {
+        background: $grey-color-light;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &:hover .dropdown-menu {
+    display: block;
+  }
+}

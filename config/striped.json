@@ -1,0 +1,89 @@
+{
+  "particle_types": [
+    {
+      "radius": 1.0,
+      "color": "#4a90d9",
+      "mu": -1.0,
+      "patches": [
+        { "patch_type": "A", "position_deg":   0.0 },
+        { "patch_type": "S", "position_deg":  90.0 },
+        { "patch_type": "A", "position_deg": 180.0 },
+        { "patch_type": "S", "position_deg": 270.0 }
+      ]
+    },
+    {
+      "radius": 1.0,
+      "color": "#e84040",
+      "mu": -1.0,
+      "patches": [
+        { "patch_type": "B", "position_deg":   0.0 },
+        { "patch_type": "A", "position_deg":  90.0 },
+        { "patch_type": "B", "position_deg": 180.0 },
+        { "patch_type": "S", "position_deg": 270.0 }
+      ]
+    },
+    {
+      "radius": 1.0,
+      "color": "#0eF50A",
+      "mu": -1.2,
+      "patches": [
+        { "patch_type": "C", "position_deg":   0.0 },
+        { "patch_type": "B", "position_deg":  90.0 },
+        { "patch_type": "C", "position_deg": 180.0 },
+        { "patch_type": "S", "position_deg": 270.0 }
+      ]
+    }
+  ],
+  "epsilon": [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]],
+  "delta": 0.12,
+  "temperature": 0.34,
+  "nu": 0.05,
+  "seed": 42,
+  "num_isolated_angles": 35,
+  "max_arc_sites_per_type": 35,
+  "relax_steps": 20,
+  "relax_alpha": 0.015,
+  "spring_k": 10.0,
+  "steps_per_frame": 10,
+  "static_friction": 0.12,
+  "lj_cutoff_factor": 3.0,
+  "relax_damping": 0.8,
+  "patch_interactions": [
+    {
+      "types": ["A", "A"], 
+      "epsilon": -1.5,
+      "angular_width_deg": [10.0, 10.0],
+      "cutoff": 1.35
+    },
+    {
+      "types": ["B", "B"], 
+      "epsilon": -1.5,
+      "angular_width_deg": [10.0, 10.0],
+      "cutoff": 1.35
+    },
+    {
+      "types": ["C", "C"], 
+      "epsilon": -1.5,
+      "angular_width_deg": [10.0, 10.0],
+      "cutoff": 1.35
+    },
+    {
+      "types": ["S", "A"], 
+      "epsilon": -0.75,
+      "angular_width_deg": [10.0, 10.0],
+      "cutoff": 1.35
+    },
+    {
+      "types": ["S", "B"], 
+      "epsilon": -0.75,
+      "angular_width_deg": [10.0, 10.0],
+      "cutoff": 1.35
+    },
+    {
+      "types": ["S", "C"], 
+      "epsilon": -0.75,
+      "angular_width_deg": [10.0, 10.0],
+      "cutoff": 1.35
+    }
+  ]
+}

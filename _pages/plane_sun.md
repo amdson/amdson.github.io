@@ -3,6 +3,7 @@ layout: page
 # date: 2022-03-07 14:04:06 -0800
 title: Which Side of the Airplane is Sunniest? 
 permalink: airplane_sun
+category: project
 ---
 <html>
 <head>
