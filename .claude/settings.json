@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ruby --version)",
+      "Bash(gem --version)",
+      "Bash(bundle --version)",
+      "Read(//c/Program Files/**)",
+      "Bash(bundle exec:*)",
+      "Read(//c/Ruby34-x64/lib/ruby/gems/**)",
+      "Read(//c/Users/amdic/dev/crystal_sim/**)"
+    ]
+  }
+}
