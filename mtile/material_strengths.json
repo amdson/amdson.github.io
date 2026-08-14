@@ -1,0 +1,17 @@
+{
+  // Per-tile-type strength. See World/MaterialStrengths.cs for load semantics.
+  // Keys are TileType enum names (case-insensitive). MaxHP is in the same
+  // TileMaxHP-multiple units as the legacy switch:
+  //   Sand 0.5 — crumbles fast
+  //   Dirt 1.0 — baseline (one full slash breaks it)
+  //   Stone 2.0 — needs multiple slashes
+  //   Foam 0.5 — cheap throwaway, also decays back to Empty after FoamLifetime
+
+  // BuildCost is meter units per placed tile (see Character/BuildMeters.cs). Only
+  // roughly correlated with MaxHP — foam is dirt-cheap because it evaporates, stone is
+  // dear because it lasts. At the move meter's refill rate stone lands ~4/sec.
+  "Stone": { "MaxHP": 2.0, "BuildCost": 4.0  },
+  "Dirt":  { "MaxHP": 1.0, "BuildCost": 1.0  },
+  "Sand":  { "MaxHP": 0.5, "BuildCost": 0.5  },
+  "Foam":  { "MaxHP": 0.5, "BuildCost": 0.25 }
+}
