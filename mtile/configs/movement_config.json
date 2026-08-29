@@ -2,9 +2,10 @@
   // options: "full" | "redirect-traction" | "legs-only"  (hot-reloads while running)
   "CorrectorScenario": "full",
   // Stand-fold engine: "qp" (linearized channel solve) | "ref" (terrain-
-  // generated carry reference + PathDeform + servo) | "lm" (nonlinear
-  // oracle, heavy). Hot-reloads — flip mid-game to A/B.
-  "FoldEngine": "ref",
+  // generated carry reference + PathDeform + servo) | "lattice" (the ref
+  // tail riding the lattice path DP's reference; Lattice* knobs below) |
+  // "lm" (nonlinear oracle, heavy). Hot-reloads — flip mid-game to A/B.
+  "FoldEngine": "lattice",
   "FoldLmIterations": 12,
   "FoldLmPenWeight": 10,
   "FoldLmHoverWeight": 0.5,
@@ -21,8 +22,9 @@
   "FoldLegForce": 6000,
   "FoldDriveForce": 3000,
   "FoldCornerForce": 1500,
-  "FoldTuckForce": 1200,
-  "FoldLegPushFadeSpeed": 200,
+  "FoldTuckForce": 3600,
+  "FoldRedirectForce": 1500,
+  "FoldLegPushFadeSpeed": 400,
   "FoldAirLateralForce": 1500,
   "FoldAirVerticalForce": 300,
   "AirAccel": 1500,
@@ -62,5 +64,17 @@
   "PeelWeightStone": 3.0,
   "PeelWeightDirt": 1.5,
   "PeelWeightSand": 0.8,
-  "PeelWeightFoam": 0.4
+  "PeelWeightFoam": 0.4,
+  // Carried orb bleeds to nothing over this many seconds.
+  "GrabDissipateSeconds": 2.0,
+  // Block throw (Plans/BLOCK_THROW_PLAN.md §5): held rest position, ball tracker, detach.
+  "GrabHandDistance": 16.8,
+  "GrabHandLean": 20,
+  "GrabBallSmoothTime": 0.08,
+  "GrabChaseSmoothTime": 0.05,
+  "GrabBallMaxSpeed": 800,
+  "GrabCatchSpeed": 40,
+  "GrabChaseMaxSeconds": 0.25,
+  "GrabSwipeSmoothing": 0.35,
+  "GrabPointMaxSeconds": 0.25
 }

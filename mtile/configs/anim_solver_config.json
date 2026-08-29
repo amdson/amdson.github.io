@@ -5,17 +5,20 @@
   "TierNoPen": 470,
   "TierAim": 60,
   "TierContact": 200,
-  "CorePosePrior": 60,
+  "CorePosePrior": 12,
   "LimbPosePrior": 4,
-  "PhaseStepPrior": 8,
+  "PhaseAccelPrior": 0.05,
   "PhaseFloorPrior": 140,
-  "ComWeightY": 23,
+  "MaxPhaseAccel": 0,
+  "ComWeightY": 8,
   "ComWeightX": 80,
+  "LowCeilingRunComWeightY": 2,
 
   "AngleCorrLimit": 3.2,
   "VertOffsetLimit": 24,
   "HorizOffsetLimit": 4,
   "MaxPhaseStep": 0.25,
   "FeatherWidth": 0.12,
-  "ContactReleaseTime": 0.1
+  "ContactReleaseTime": 0.1,
+  "ContactEngageTime": 0.08
 }
