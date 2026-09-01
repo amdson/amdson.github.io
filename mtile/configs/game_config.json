@@ -1,10 +1,10 @@
 ﻿{
-  // options: "start" | "arena" | "plain" | "gauntlet" (left-to-right combat run) | "sandbox" (one Template enemy — see Entities/Enemies/Types/TemplateEnemy.cs) | "training" | "flat" | "corridor" (bumpy tunnel) | "gym" (1-high ledges, CorrectorScenario applies)
-  "Stage": "gauntlet",
+  // options: "spires" (endless procedural world - spiky hills + rare thousand-tile spires, Levels/spires.json) | "start" | "hill" | "arena" | "plain" | "gauntlet" (left-to-right combat run) | "sandbox" (one Template enemy — see Entities/Enemies/Types/TemplateEnemy.cs) | "training" | "flat" | "corridor" (bumpy tunnel) | "gym" (1-high ledges, CorrectorScenario applies)
+  "Stage": "spires",
   "WindowWidth": 1000,
   "WindowHeight": 900,
-  "Fullscreen": false,
-  "DebugDrawHitboxes":          false,
+  "Fullscreen": true,
+  "DebugDrawHitboxes":          true,
   "DebugDrawHurtboxes":         false,
   "DebugDrawPlayerOrientation": false,
   "DebugDrawBodies":            false,
@@ -17,7 +17,7 @@
   "PlayerSpriteBindings":       ["rabbit", "badger"],
   "DebugDrawSkeleton":          false,
   "RunAnimationSolver":         true,
-  "CameraZoom":                 5.0,
+  "CameraZoom":                 3.0,
   "DebugDrawConstraints":       false, 
   "DebugDrawSteeringRamps":     false,
   "DebugDrawGuidedPath":        false,
