@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MTile.Web",
   "resources": {
-    "hash": "sha256-p6hw9vbk8FTczbfYN1uRS3lPjhMsuoOU+8yr6Twk+T4=",
+    "hash": "sha256-e/BjpuMnVrVk/8Sag/KbkDh2qsweqeVCrK7KcwuHuRI=",
     "jsModuleNative": {
       "dotnet.native.8.0.30.dq4mcfmpm2.js": "sha256-/vcfaQdiiqz2OXYbCQKA0lRi6L2XZnTjf70WkZTdj2E="
     },
@@ -9,7 +9,7 @@
       "dotnet.runtime.8.0.30.8j5co2cpzw.js": "sha256-Iz92tEdLDz6hULg8toBVTeVi4QRnFEbFBy3lo3dbmEw="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-wU1QTBPl5ZxYQiBKCPJ8pTsAWsz57CUKhl79hOxPg1A="
+      "dotnet.native.wasm": "sha256-f7gLndXhJytS6AqoojDpzr1ieFzZJk2Yf4rOwD6N2Qk="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -32,14 +32,14 @@
       "Microsoft.Extensions.Primitives.wasm": "sha256-6187ynEahDlSLMBvD4vAmiLpZ3clRb5xu6rM7O8AxNo=",
       "Microsoft.JSInterop.wasm": "sha256-r9dkR5134QvSR5zRWncgwA3QgGc2mbiRwhPteP2xbpk=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-vXbrJxN/hJ4fcUDVzXW+XhXQrPJExVIZ5uQbSKQLnsQ=",
-      "MTile.Web.wasm": "sha256-9RsTjnMGNGB1PLqJb2gDImdtPggnapuA/aN+MDDz51w=",
+      "MTile.Web.wasm": "sha256-HzQ3ubOcqrA0tVXlkKzkPn3i5GJ+J9rLa+Am2ubYb5s=",
       "nkast.Wasm.Audio.wasm": "sha256-KGwlNNGEYXve6o+MRBpViVuKmN6TJpYltOiJIjGOo6I=",
       "nkast.Wasm.Canvas.wasm": "sha256-C4hW1Iqj6tdYQ7x3s2Mbo0B6t7vd8LPIuE+3UNYrjaI=",
       "nkast.Wasm.Dom.wasm": "sha256-l4hf03MQb1wsk5N8TA7XxbsmxZqtsEf1zYGI1vg7cIg=",
       "nkast.Wasm.XHR.wasm": "sha256-73AUnhjryhROyIBguI/tT1suXQB7fuXxjEnowqEhtC4=",
       "nkast.Wasm.XR.wasm": "sha256-I8t6qzxk4Vsgc2KigFuOJW+n0bP/M02c9GPyf061CSE=",
       "System.Collections.Concurrent.wasm": "sha256-2IXtZUkP0TvPdxVqC6ZlGTBdwQfj12NI3doeRHJvNs0=",
-      "System.Collections.wasm": "sha256-UUZ9W9IrjxH/fmVY5VUJ55xZAOiTlfA8ltfMygNngIM=",
+      "System.Collections.wasm": "sha256-VGyfuzLuieUlU8GocdvZwTIClSF7HxBciHdGJMD3u0E=",
       "System.ComponentModel.Primitives.wasm": "sha256-+BC5vYH8zBRw2tEtxi7lM9aNbvlPmcMZ/tDcLpzCZKI=",
       "System.ComponentModel.TypeConverter.wasm": "sha256-vFdwDnYkmuaLgaj/aS63JVM6z4/OUvyogFM/xfd0Lvk=",
       "System.ComponentModel.wasm": "sha256-gr1bMtvsV0b8hWhKYos+74JLu9O6zG/7taOD78q4uys=",
