@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MTile.Web",
   "resources": {
-    "hash": "sha256-gPvifakKjsAMTaxYQL8q4R7uF4f76phnBF6Il3pyHAI=",
+    "hash": "sha256-YAR27Vm2SXQXjXLqHfJ4sRY+ALJUFEPjuYi+mx0FdUc=",
     "jsModuleNative": {
       "dotnet.native.8.0.30.dq4mcfmpm2.js": "sha256-/vcfaQdiiqz2OXYbCQKA0lRi6L2XZnTjf70WkZTdj2E="
     },
@@ -9,7 +9,7 @@
       "dotnet.runtime.8.0.30.8j5co2cpzw.js": "sha256-Iz92tEdLDz6hULg8toBVTeVi4QRnFEbFBy3lo3dbmEw="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-VfthUCrbZs5LPyX9hfUoRHDT/F6J7yE9v5KVij54nYo="
+      "dotnet.native.wasm": "sha256-veHI1hnv7D3gXHijlT9bTmdW+WqnJ1rj9sw9Df+otD8="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -32,7 +32,7 @@
       "Microsoft.Extensions.Primitives.wasm": "sha256-6187ynEahDlSLMBvD4vAmiLpZ3clRb5xu6rM7O8AxNo=",
       "Microsoft.JSInterop.wasm": "sha256-r9dkR5134QvSR5zRWncgwA3QgGc2mbiRwhPteP2xbpk=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-vXbrJxN/hJ4fcUDVzXW+XhXQrPJExVIZ5uQbSKQLnsQ=",
-      "MTile.Web.wasm": "sha256-jcFbhjsKSU+Ap394X8RTDh5iZ3VjO0n74Q76W0VmM10=",
+      "MTile.Web.wasm": "sha256-qnH7hNycCZVRanaAcZ79pJMkQniwfynVU8Dtpd27ZFE=",
       "nkast.Wasm.Audio.wasm": "sha256-KGwlNNGEYXve6o+MRBpViVuKmN6TJpYltOiJIjGOo6I=",
       "nkast.Wasm.Canvas.wasm": "sha256-C4hW1Iqj6tdYQ7x3s2Mbo0B6t7vd8LPIuE+3UNYrjaI=",
       "nkast.Wasm.Dom.wasm": "sha256-l4hf03MQb1wsk5N8TA7XxbsmxZqtsEf1zYGI1vg7cIg=",
