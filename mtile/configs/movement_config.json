@@ -13,7 +13,7 @@
   "FoldLmEffortWeight": 0.02,
   "FoldLmMaxForce": 8000,
   // Fold tuning surface (see MovementConfig for each knob's role) — hot-reloads.
-  "FoldHoverOffset": 10,
+  "FoldHoverOffset": 14.8,
   "CrouchHoverOffset": 0,
   "FoldClimbReachUp": 20,
   "CrouchClimbReachUp": 4,
@@ -27,9 +27,11 @@
   "FoldLegPushFadeSpeed": 400,
   "FoldAirLateralForce": 1500,
   "FoldAirVerticalForce": 300,
+  "FoldContactPushForce": 1000,
   "AirAccel": 1500,
   "MaxAirSpeed": 150,
   "AirDrag": 500,
+  "QuadraticAirDrag": 0.0005,
   "JumpVelocity": -100,
   "JumpHoldForce": -1500,
   "JumpInitForce": 0,
@@ -46,7 +48,6 @@
   "SpringK": 300,
   "WalkAccel": 3000,
   "MaxWalkSpeed": 100,
-  "BrakingForce": 3000,
   // Block peel (Shift+LMB grab) — see MovementConfig for each knob's role. Hot-reloads.
   // false restores the legacy one-frame drag-rip.
   "BlockPeelEnabled": true,

@@ -4,7 +4,43 @@
   "Skeleton": "biped",
   "Duration": 0.45,
   "Loop": false,
-  "ReferenceArc": "mantle",
+  "Motion": "Track",
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0,
+        "Y": 40,
+        "W": 0,
+        "H": 0,
+        "Label": "floor"
+      },
+      {
+        "Id": "g2",
+        "Kind": "Block",
+        "X": 18.333334,
+        "Y": 21.666666,
+        "W": 18.333334,
+        "H": 18.333334,
+        "Label": "block"
+      }
+    ]
+  },
+  "Contacts": [
+    {
+      "Point": "support_r",
+      "Start": 0,
+      "End": 0.65,
+      "Source": "SelfPlant"
+    },
+    {
+      "Point": "support_l",
+      "Start": 1,
+      "End": 1.0,
+      "Source": "SelfPlant"
+    }
+  ],
   "Keyframes": [
     {
       "Time": 0,
@@ -46,27 +82,12 @@
           "Rotation": 1.11
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.3258
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 0.78
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 0.98
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258
-        }
-      ],
-      "Contacts": [
-        {
-          "Node": "foot_r",
-          "Weight": 1,
-          "Source": "SelfPlant"
         }
       ],
       "Additions": [
@@ -75,6 +96,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -23.779778,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 0,
+          "Py": 0,
           "Dx": 0,
           "Dy": 0
         }
@@ -120,27 +149,12 @@
           "Rotation": 1.95
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.0258
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 0.78
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 0.98
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258
-        }
-      ],
-      "Contacts": [
-        {
-          "Node": "foot_r",
-          "Weight": 1,
-          "Source": "SelfPlant"
         }
       ],
       "Additions": [
@@ -149,6 +163,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -23.779778,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 0.59183633,
+          "Py": -20.516378,
           "Dx": 0,
           "Dy": 0
         }
@@ -194,20 +216,12 @@
           "Rotation": 1.53
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.1258
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 0.71
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 1.9
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.5258
         }
       ],
       "Additions": [
@@ -216,6 +230,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -23.779778,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 9.628878,
+          "Py": -30.236002,
           "Dx": 0,
           "Dy": 0
         }
@@ -261,27 +283,12 @@
           "Rotation": 0.48
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.3258
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": -0.04
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 2.1
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.0258
-        }
-      ],
-      "Contacts": [
-        {
-          "Node": "foot_l",
-          "Weight": 1,
-          "Source": "SelfPlant"
         }
       ],
       "Additions": [
@@ -290,6 +297,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -23.779778,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 30,
+          "Py": -26.666666,
           "Dx": 0,
           "Dy": 0
         }

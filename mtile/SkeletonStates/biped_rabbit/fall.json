@@ -4,6 +4,19 @@
   "Skeleton": "biped_rabbit",
   "Duration": 0.5,
   "Loop": true,
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0.0,
+        "Y": 40.0,
+        "W": 0.0,
+        "H": 0.0,
+        "Label": "floor"
+      }
+    ]
+  },
   "Keyframes": [
     {
       "Time": 0,

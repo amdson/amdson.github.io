@@ -4,7 +4,43 @@
   "Skeleton": "biped",
   "Duration": 0.45,
   "Loop": false,
-  "ReferenceArc": "parkour",
+  "Motion": "Track",
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0,
+        "Y": 40,
+        "W": 0,
+        "H": 0,
+        "Label": "floor"
+      },
+      {
+        "Id": "g2",
+        "Kind": "Block",
+        "X": 18.333334,
+        "Y": 21.666666,
+        "W": 18.333334,
+        "H": 18.333334,
+        "Label": "block"
+      }
+    ]
+  },
+  "Contacts": [
+    {
+      "Point": "support_r",
+      "Start": 0,
+      "End": 0.65,
+      "Source": "SelfPlant"
+    },
+    {
+      "Point": "support_l",
+      "Start": 1,
+      "End": 1.0,
+      "Source": "SelfPlant"
+    }
+  ],
   "Keyframes": [
     {
       "Time": 0,
@@ -46,27 +82,12 @@
           "Rotation": 1.11
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.3258
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 0.9870607
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 1.1423378
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": 0.13139674
-        }
-      ],
-      "Contacts": [
-        {
-          "Node": "foot_r",
-          "Weight": 1,
-          "Source": "SelfPlant"
         }
       ],
       "Additions": [
@@ -75,6 +96,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -23.779778,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": -4.0953646,
+          "Py": 0.38345435,
           "Dx": 0,
           "Dy": 0
         }
@@ -120,27 +149,12 @@
           "Rotation": 1.95
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.0258
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 0.43220305
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 1.5479292
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258
-        }
-      ],
-      "Contacts": [
-        {
-          "Node": "foot_r",
-          "Weight": 1,
-          "Source": "SelfPlant"
         }
       ],
       "Additions": [
@@ -149,6 +163,14 @@
           "Kind": "Point",
           "Px": 2.8000002,
           "Py": -13.579762,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 0.28912148,
+          "Py": -26.41454,
           "Dx": 0,
           "Dy": 0
         }
@@ -194,20 +216,12 @@
           "Rotation": 1.53
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.1258
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 0.71
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 1.9
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.5258
         }
       ],
       "Additions": [
@@ -216,6 +230,14 @@
           "Kind": "Point",
           "Px": -3.2000003,
           "Py": -14.979776,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 11.9527235,
+          "Py": -36.849022,
           "Dx": 0,
           "Dy": 0
         }
@@ -261,27 +283,12 @@
           "Rotation": 0.6813211
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.3258
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 0.6203966
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 2.1
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.0258
-        }
-      ],
-      "Contacts": [
-        {
-          "Node": "foot_l",
-          "Weight": 1,
-          "Source": "SelfPlant"
         }
       ],
       "Additions": [
@@ -290,6 +297,14 @@
           "Kind": "Point",
           "Px": -4.4000006,
           "Py": -16.379774,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 42.35067,
+          "Py": -31.501118,
           "Dx": 0,
           "Dy": 0
         }

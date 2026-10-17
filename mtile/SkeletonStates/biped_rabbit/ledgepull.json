@@ -4,7 +4,37 @@
   "Skeleton": "biped_rabbit",
   "Duration": 0.45,
   "Loop": false,
-  "ReferenceArc": "ledge_pull",
+  "Motion": "Track",
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0.0,
+        "Y": 40.0,
+        "W": 0.0,
+        "H": 0.0,
+        "Label": "floor"
+      },
+      {
+        "Id": "g2",
+        "Kind": "Block",
+        "X": 18.333333333333336,
+        "Y": 21.666666666666664,
+        "W": 18.333333333333336,
+        "H": 18.333333333333336,
+        "Label": "block"
+      }
+    ]
+  },
+  "Contacts": [
+    {
+      "Point": "support_l",
+      "Start": 0,
+      "End": 0.766197,
+      "Source": "SelfPlant"
+    }
+  ],
   "Keyframes": [
     {
       "Time": 0,
@@ -82,13 +112,6 @@
           "Rotation": -1.3258
         }
       ],
-      "Contacts": [
-        {
-          "Node": "foot_l",
-          "Weight": 1,
-          "Source": "SelfPlant"
-        }
-      ],
       "Additions": [
         {
           "Name": "com",
@@ -99,10 +122,10 @@
           "Dy": 0
         },
         {
-          "Name": "edref",
+          "Name": "body_path",
           "Kind": "Point",
-          "Px": -12.200004,
-          "Py": -0.40000015,
+          "Px": 0,
+          "Py": 0,
           "Dx": 0,
           "Dy": 0
         }
@@ -184,13 +207,6 @@
           "Rotation": -0.47513872
         }
       ],
-      "Contacts": [
-        {
-          "Node": "foot_l",
-          "Weight": 1,
-          "Source": "SelfPlant"
-        }
-      ],
       "Additions": [
         {
           "Name": "com",
@@ -201,10 +217,10 @@
           "Dy": 0
         },
         {
-          "Name": "edref",
+          "Name": "body_path",
           "Kind": "Point",
-          "Px": -11.4,
-          "Py": 6.5863132E-06,
+          "Px": 1.51684,
+          "Py": -37.38272,
           "Dx": 0,
           "Dy": 0
         }
@@ -286,13 +302,6 @@
           "Rotation": -1.2193449
         }
       ],
-      "Contacts": [
-        {
-          "Node": "foot_l",
-          "Weight": 1,
-          "Source": "SelfPlant"
-        }
-      ],
       "Additions": [
         {
           "Name": "com",
@@ -303,10 +312,10 @@
           "Dy": 0
         },
         {
-          "Name": "edref",
+          "Name": "body_path",
           "Kind": "Point",
-          "Px": -6.9999986,
-          "Py": -1.9999952,
+          "Px": 7.895742,
+          "Py": -71.126175,
           "Dx": 0,
           "Dy": 0
         }
@@ -388,13 +397,20 @@
           "Rotation": -1.2193449
         }
       ],
-      "Contacts": [],
       "Additions": [
         {
           "Name": "com",
           "Kind": "Point",
           "Px": -2.4000003,
           "Py": -20.979769,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 8.501265,
+          "Py": -71.65488,
           "Dx": 0,
           "Dy": 0
         }
@@ -476,7 +492,6 @@
           "Rotation": -1.2193449
         }
       ],
-      "Contacts": [],
       "Additions": [
         {
           "Name": "com",
@@ -487,10 +502,10 @@
           "Dy": 0
         },
         {
-          "Name": "edref",
+          "Name": "body_path",
           "Kind": "Point",
-          "Px": -0.19999847,
-          "Py": -14.999995,
+          "Px": 15.5047,
+          "Py": -71.56769,
           "Dx": 0,
           "Dy": 0
         }

@@ -4,7 +4,20 @@
   "Skeleton": "biped",
   "Duration": 0.4,
   "Loop": false,
-  "ReferenceArc": "dropdown",
+  "Motion": "Track",
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0,
+        "Y": 40,
+        "W": 0,
+        "H": 0,
+        "Label": "floor"
+      }
+    ]
+  },
   "Keyframes": [
     {
       "Time": 0,
@@ -46,20 +59,12 @@
           "Rotation": 2.373407
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.8382645
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 0.29010972
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 2.00187
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.401298
         }
       ],
       "Additions": [
@@ -68,6 +73,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -16.631971,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 0,
+          "Py": 0,
           "Dx": 0,
           "Dy": 0
         }
@@ -113,20 +126,12 @@
           "Rotation": 1.8719181
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.8245732
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 0.8572721
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 1.7784688
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3834616
         }
       ],
       "Additions": [
@@ -135,6 +140,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -16.631971,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 25.452457,
+          "Py": 41.796955,
           "Dx": 0,
           "Dy": 0
         }
@@ -180,20 +193,12 @@
           "Rotation": 1.281146
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.8039541
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 1.3831776
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 1.3849895
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3637477
         }
       ],
       "Additions": [
@@ -202,6 +207,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -16.631971,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 39.444443,
+          "Py": 112.44442,
           "Dx": 0,
           "Dy": 0
         }

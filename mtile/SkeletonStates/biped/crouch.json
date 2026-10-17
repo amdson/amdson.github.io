@@ -4,6 +4,19 @@
   "Skeleton": "biped",
   "Duration": 0.3,
   "Loop": false,
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0,
+        "Y": 40,
+        "W": 0,
+        "H": 0,
+        "Label": "floor"
+      }
+    ]
+  },
   "Keyframes": [
     {
       "Time": 0,
@@ -45,20 +58,12 @@
           "Rotation": 2.1103716
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -2.6763842
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 1.5951812
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 0.17897403
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -2.5500536
         }
       ],
       "Additions": [

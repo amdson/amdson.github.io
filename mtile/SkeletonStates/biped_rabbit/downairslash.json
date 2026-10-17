@@ -5,17 +5,9 @@
   "Duration": 0.18,
   "Loop": true,
   "Region": "UpperBody",
-  "ExtraBones": [
-    {
-      "Name": "knife",
-      "Parent": "arm_r_lower",
-      "Rotation": -1.5707964,
-      "Length": 0
-    }
-  ],
   "Keyframes": [
     {
-      "Time": 0.0014,
+      "Time": 0,
       "Bones": [
         {
           "Bone": "hip",
@@ -23,55 +15,35 @@
         },
         {
           "Bone": "chest",
-          "Rotation": -1.44
+          "Rotation": -1.5707964
         },
         {
           "Bone": "head",
           "Rotation": 0
         },
         {
+          "Bone": "shoulder_l",
+          "Rotation": -1.57
+        },
+        {
+          "Bone": "shoulder_r",
+          "Rotation": 1.57
+        },
+        {
           "Bone": "arm_l_upper",
-          "Rotation": -1.1295738
+          "Rotation": -1.5715926
         },
         {
           "Bone": "arm_l_lower",
-          "Rotation": -0.86564827
+          "Rotation": 0
         },
         {
           "Bone": "arm_r_upper",
-          "Rotation": -1.94
+          "Rotation": 1.5715927
         },
         {
           "Bone": "arm_r_lower",
-          "Rotation": -0.4944
-        },
-        {
-          "Bone": "leg_l_upper",
-          "Rotation": -1.9615955
-        },
-        {
-          "Bone": "leg_l_lower",
-          "Rotation": 0.62
-        },
-        {
-          "Bone": "foot_l",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "leg_r_upper",
-          "Rotation": 1.62
-        },
-        {
-          "Bone": "leg_r_lower",
-          "Rotation": 0.2
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "knife",
-          "Rotation": -1.5707964
+          "Rotation": 0
         },
         {
           "Bone": "hip_l",
@@ -82,99 +54,28 @@
           "Rotation": 0
         },
         {
-          "Bone": "shoulder_l",
-          "Rotation": -1.57
-        },
-        {
-          "Bone": "shoulder_r",
-          "Rotation": 1.57
-        }
-      ],
-      "Additions": [
-        {
-          "Name": "com",
-          "Kind": "Point",
-          "Px": 0,
-          "Py": -21.188177,
-          "Dx": 0,
-          "Dy": 0
-        }
-      ]
-    },
-    {
-      "Time": 0.14,
-      "Bones": [
-        {
-          "Bone": "hip",
-          "Rotation": 0
-        },
-        {
-          "Bone": "chest",
-          "Rotation": -1.52
-        },
-        {
-          "Bone": "head",
-          "Rotation": 0
-        },
-        {
-          "Bone": "arm_l_upper",
-          "Rotation": -1.1295738
-        },
-        {
-          "Bone": "arm_l_lower",
-          "Rotation": -0.86564827
-        },
-        {
-          "Bone": "arm_r_upper",
-          "Rotation": -1.115
-        },
-        {
-          "Bone": "arm_r_lower",
-          "Rotation": -0.6752
-        },
-        {
           "Bone": "leg_l_upper",
-          "Rotation": -1.9615955
+          "Rotation": -1.5707989
         },
         {
           "Bone": "leg_l_lower",
-          "Rotation": 0.62
-        },
-        {
-          "Bone": "foot_l",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "leg_r_upper",
-          "Rotation": 1.62
-        },
-        {
-          "Bone": "leg_r_lower",
-          "Rotation": 0.2
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "knife",
-          "Rotation": -1.5707964
-        },
-        {
-          "Bone": "hip_l",
-          "Rotation": -3.14159
-        },
-        {
-          "Bone": "hip_r",
           "Rotation": 0
         },
         {
-          "Bone": "shoulder_l",
-          "Rotation": -1.57
+          "Bone": "foot_l",
+          "Rotation": -1.3258177
         },
         {
-          "Bone": "shoulder_r",
-          "Rotation": 1.57
+          "Bone": "leg_r_upper",
+          "Rotation": 1.5707964
+        },
+        {
+          "Bone": "leg_r_lower",
+          "Rotation": 0
+        },
+        {
+          "Bone": "foot_r",
+          "Rotation": -1.3258177
         }
       ],
       "Additions": [
@@ -182,272 +83,24 @@
           "Name": "com",
           "Kind": "Point",
           "Px": 0,
-          "Py": -21.188177,
-          "Dx": 0,
-          "Dy": 0
-        }
-      ]
-    },
-    {
-      "Time": 0.52,
-      "Bones": [
-        {
-          "Bone": "hip",
-          "Rotation": 0
-        },
-        {
-          "Bone": "chest",
-          "Rotation": -1.72
-        },
-        {
-          "Bone": "head",
-          "Rotation": 0
-        },
-        {
-          "Bone": "arm_l_upper",
-          "Rotation": -1.1295738
-        },
-        {
-          "Bone": "arm_l_lower",
-          "Rotation": -0.86564827
-        },
-        {
-          "Bone": "arm_r_upper",
-          "Rotation": 1.415
-        },
-        {
-          "Bone": "arm_r_lower",
-          "Rotation": -0.25
-        },
-        {
-          "Bone": "leg_l_upper",
-          "Rotation": -1.9615955
-        },
-        {
-          "Bone": "leg_l_lower",
-          "Rotation": 0.62
-        },
-        {
-          "Bone": "foot_l",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "leg_r_upper",
-          "Rotation": 1.62
-        },
-        {
-          "Bone": "leg_r_lower",
-          "Rotation": 0.2
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "knife",
-          "Rotation": -1.5707964
-        },
-        {
-          "Bone": "hip_l",
-          "Rotation": -3.14159
-        },
-        {
-          "Bone": "hip_r",
-          "Rotation": 0
-        },
-        {
-          "Bone": "shoulder_l",
-          "Rotation": -1.57
-        },
-        {
-          "Bone": "shoulder_r",
-          "Rotation": 1.57
-        }
-      ],
-      "Additions": [
-        {
-          "Name": "com",
-          "Kind": "Point",
-          "Px": 0,
-          "Py": -21.188177,
-          "Dx": 0,
-          "Dy": 0
-        }
-      ]
-    },
-    {
-      "Time": 0.66,
-      "Bones": [
-        {
-          "Bone": "hip",
-          "Rotation": 0
-        },
-        {
-          "Bone": "chest",
-          "Rotation": -1.62
-        },
-        {
-          "Bone": "head",
-          "Rotation": 0
-        },
-        {
-          "Bone": "arm_l_upper",
-          "Rotation": -1.1295738
-        },
-        {
-          "Bone": "arm_l_lower",
-          "Rotation": -0.86564827
-        },
-        {
-          "Bone": "arm_r_upper",
-          "Rotation": 2.055
-        },
-        {
-          "Bone": "arm_r_lower",
-          "Rotation": -1.0808
-        },
-        {
-          "Bone": "leg_l_upper",
-          "Rotation": -1.9615955
-        },
-        {
-          "Bone": "leg_l_lower",
-          "Rotation": 0.62
-        },
-        {
-          "Bone": "foot_l",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "leg_r_upper",
-          "Rotation": 1.62
-        },
-        {
-          "Bone": "leg_r_lower",
-          "Rotation": 0.2
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "knife",
-          "Rotation": -1.5707964
-        },
-        {
-          "Bone": "hip_l",
-          "Rotation": -3.14159
-        },
-        {
-          "Bone": "hip_r",
-          "Rotation": 0
-        },
-        {
-          "Bone": "shoulder_l",
-          "Rotation": -1.57
-        },
-        {
-          "Bone": "shoulder_r",
-          "Rotation": 1.57
-        }
-      ],
-      "Additions": [
-        {
-          "Name": "com",
-          "Kind": "Point",
-          "Px": 0,
-          "Py": -21.188177,
-          "Dx": 0,
-          "Dy": 0
-        }
-      ]
-    },
-    {
-      "Time": 1,
-      "Bones": [
-        {
-          "Bone": "hip",
-          "Rotation": 0
-        },
-        {
-          "Bone": "chest",
-          "Rotation": -1.44
-        },
-        {
-          "Bone": "head",
-          "Rotation": 0
-        },
-        {
-          "Bone": "arm_l_upper",
-          "Rotation": -1.1295738
-        },
-        {
-          "Bone": "arm_l_lower",
-          "Rotation": -0.86564827
-        },
-        {
-          "Bone": "arm_r_upper",
-          "Rotation": -1.94
-        },
-        {
-          "Bone": "arm_r_lower",
-          "Rotation": -0.4944
-        },
-        {
-          "Bone": "leg_l_upper",
-          "Rotation": -1.9615955
-        },
-        {
-          "Bone": "leg_l_lower",
-          "Rotation": 0.62
-        },
-        {
-          "Bone": "foot_l",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "leg_r_upper",
-          "Rotation": 1.62
-        },
-        {
-          "Bone": "leg_r_lower",
-          "Rotation": 0.2
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258
-        },
-        {
-          "Bone": "knife",
-          "Rotation": -1.5707964
-        },
-        {
-          "Bone": "hip_l",
-          "Rotation": -3.14159
-        },
-        {
-          "Bone": "hip_r",
-          "Rotation": 0
-        },
-        {
-          "Bone": "shoulder_l",
-          "Rotation": -1.57
-        },
-        {
-          "Bone": "shoulder_r",
-          "Rotation": 1.57
-        }
-      ],
-      "Additions": [
-        {
-          "Name": "com",
-          "Kind": "Point",
-          "Px": 0,
-          "Py": -21.188177,
+          "Py": -20.940285,
           "Dx": 0,
           "Dy": 0
         }
       ]
     }
-  ]
+  ],
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0.0,
+        "Y": 40.0,
+        "W": 0.0,
+        "H": 0.0,
+        "Label": "floor"
+      }
+    ]
+  }
 }

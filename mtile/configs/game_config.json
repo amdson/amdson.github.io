@@ -1,10 +1,11 @@
 ﻿{
-  // options: "spires" (endless procedural world - spiky hills + rare thousand-tile spires, Levels/spires.json) | "start" | "hill" | "arena" | "plain" | "gauntlet" (left-to-right combat run) | "sandbox" (one Template enemy — see Entities/Enemies/Types/TemplateEnemy.cs) | "training" | "flat" | "corridor" (bumpy tunnel) | "gym" (1-high ledges, CorrectorScenario applies)
-  "Stage": "spires",
+  // options: "spires" (endless procedural world - spiky hills + rare thousand-tile spires, Levels/spires.json) | "start" | "hill" | "arena" | "plain" | "gauntlet" (left-to-right combat run) | "sandbox" (one Template enemy — see Entities/Enemies/Types/TemplateEnemy.cs) | "aspid" (Primal-Aspid fight room, respawning waves of 3) | "training" | "warden" (armored walker demo) | "warlord" (mobile boss: cleave/ram/leap-slam + foam cage) | "prism" (dashing boss that plants long cone-ray emitters) | "quillback" (fast armored hedgehog: regenerating shell, close-range flurry, digs/builds, punishable quill storm at range) | "wizard" (caster: orb waves + pillars) | "weights" (knockback-by-mass rows: passive balls left, melee sparrers right, 0.3 → 40) | "flat" | "fighter_gauntlet" (every league fighter in turn, weakest first; dying restarts) | "corridor" (bumpy tunnel) | "gym" (1-high ledges, CorrectorScenario applies)
+  // entity options: aspid, wizard, quillback, warden, warlord, prism, fighter_gauntlet, spearman, pulser, depths (2-player co-op cave gauntlet)
+  "Stage": "depths",
   "WindowWidth": 1000,
   "WindowHeight": 900,
   "Fullscreen": true,
-  "DebugDrawHitboxes":          true,
+  "DebugDrawHitboxes":          false,
   "DebugDrawHurtboxes":         false,
   "DebugDrawPlayerOrientation": false,
   "DebugDrawBodies":            false,
@@ -12,19 +13,24 @@
   "BackgroundStyle":            "trees", //trees / mountain
   "DrawPlayerSprites":          false, 
   "DrawPlayerSpriteSkin":       true, 
-  "AnimationRig":               "biped_rabbit", 
-  // "PlayerSpriteBinding":        "pumpkin_man_downsampled", 
-  "PlayerSpriteBindings":       ["rabbit", "badger"],
+  "AnimationRig":               "biped_rabbit", // "biped" for the plain stick rig (pumpkin_man_downsampled skin); "biped_rabbit" for the strutted rig + rabbit/badger skins
+  // "PlayerSpriteBinding":        "pumpkin_man_downsampled",
+  "PlayerSpriteBindings":       ["rabbit_floppy"], // rabbit/badger bindings need AnimationRig biped_rabbit; ["pumpkin_man_downsampled"] with AnimationRig biped
   "DebugDrawSkeleton":          false,
   "RunAnimationSolver":         true,
-  "CameraZoom":                 3.0,
+  "CameraZoom":                 5.0,
   "DebugDrawConstraints":       false, 
-  "DebugDrawSteeringRamps":     false,
   "DebugDrawGuidedPath":        false,
   "DebugDrawCorrectorReference": false,
   "DebugDrawCorrectorBallistic": false,
   "DebugDrawCorrectorSolved":    false,
   "DebugDrawCObstacles":         false,
+  // Physics-debug overlays whose CODE defaults are true — listed here so normal play
+  // boots clean and flipping them is a config edit, not a code hunt:
+  "DebugDrawCoast":              false, // aqua ballistic coast rollout + clearance rows
+  "DebugDrawStepPlanner":        true, // planned foot targets/treads overlay
+  "DebugDrawCorrectorContacts":  false, // contact points + impulse (dv) arrows
+  "DebugDrawCorridor":           false, // corridor probe scan
   "DebugDrawHealthBars":        false,
   "DebugDrawForceFields":       false,
   "MouseTrail": true,

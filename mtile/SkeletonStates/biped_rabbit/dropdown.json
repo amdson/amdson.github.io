@@ -4,7 +4,20 @@
   "Skeleton": "biped_rabbit",
   "Duration": 0.4,
   "Loop": false,
-  "ReferenceArc": "dropdown",
+  "Motion": "Track",
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0.0,
+        "Y": 40.0,
+        "W": 0.0,
+        "H": 0.0,
+        "Label": "floor"
+      }
+    ]
+  },
   "Keyframes": [
     {
       "Time": 0,
@@ -88,6 +101,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -16.631971,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 0,
+          "Py": 0,
           "Dx": 0,
           "Dy": 0
         }
@@ -177,6 +198,14 @@
           "Py": -16.631971,
           "Dx": 0,
           "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 25.452457,
+          "Py": 41.796955,
+          "Dx": 0,
+          "Dy": 0
         }
       ]
     },
@@ -262,6 +291,14 @@
           "Kind": "Point",
           "Px": 0,
           "Py": -16.631971,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 39.444443,
+          "Py": 112.44442,
           "Dx": 0,
           "Dy": 0
         }

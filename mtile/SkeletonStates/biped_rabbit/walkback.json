@@ -4,6 +4,19 @@
   "Skeleton": "biped_rabbit",
   "Duration": 0.9,
   "Loop": true,
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0.0,
+        "Y": 40.0,
+        "W": 0.0,
+        "H": 0.0,
+        "Label": "floor"
+      }
+    ]
+  },
   "Keyframes": [
     {
       "Time": 0,
@@ -113,7 +126,7 @@
         },
         {
           "Bone": "arm_l_lower",
-          "Rotation": 1.1920929E-07
+          "Rotation": 1.1920929e-07
         },
         {
           "Bone": "arm_r_upper",

@@ -4,6 +4,33 @@
   "Skeleton": "biped_rabbit",
   "Duration": 0.8,
   "Loop": true,
+  "Motion": "Track",
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0,
+        "Y": 40,
+        "W": 0,
+        "H": 0
+      }
+    ]
+  },
+  "Contacts": [
+    {
+      "Point": "support_l",
+      "Start": 0,
+      "End": 0.5,
+      "Source": "SelfPlant"
+    },
+    {
+      "Point": "support_r",
+      "Start": 0.5,
+      "End": 1,
+      "Source": "SelfPlant"
+    }
+  ],
   "Keyframes": [
     {
       "Time": 0,
@@ -81,19 +108,20 @@
           "Stretch": 1.0147456
         }
       ],
-      "Contacts": [
-        {
-          "Node": "foot_l",
-          "Weight": 1,
-          "Source": "SelfPlant"
-        }
-      ],
       "Additions": [
         {
           "Name": "com",
           "Kind": "Point",
           "Px": 0,
           "Py": -22.127161,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 0,
+          "Py": 0,
           "Dx": 0,
           "Dy": 0
         }
@@ -165,19 +193,20 @@
           "Stretch": 0.96438175
         }
       ],
-      "Contacts": [
-        {
-          "Node": "foot_l",
-          "Weight": 1,
-          "Source": "SelfPlant"
-        }
-      ],
       "Additions": [
         {
           "Name": "com",
           "Kind": "Point",
           "Px": 0,
           "Py": -22.127161,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 8.413908,
+          "Py": 0,
           "Dx": 0,
           "Dy": 0
         }
@@ -259,19 +288,20 @@
           "Stretch": 0.65904975
         }
       ],
-      "Contacts": [
-        {
-          "Node": "foot_r",
-          "Weight": 1,
-          "Source": "SelfPlant"
-        }
-      ],
       "Additions": [
         {
           "Name": "com",
           "Kind": "Point",
           "Px": 0,
           "Py": -22.127161,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 18.295542,
+          "Py": 0,
           "Dx": 0,
           "Dy": 0
         }
@@ -343,19 +373,20 @@
           "Stretch": 0.53393304
         }
       ],
-      "Contacts": [
-        {
-          "Node": "foot_r",
-          "Weight": 1,
-          "Source": "SelfPlant"
-        }
-      ],
       "Additions": [
         {
           "Name": "com",
           "Kind": "Point",
           "Px": 0,
           "Py": -22.127161,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 23.576029,
+          "Py": 0,
           "Dx": 0,
           "Dy": 0
         }
@@ -437,19 +468,20 @@
           "Stretch": 1.0147456
         }
       ],
-      "Contacts": [
-        {
-          "Node": "foot_l",
-          "Weight": 1,
-          "Source": "SelfPlant"
-        }
-      ],
       "Additions": [
         {
           "Name": "com",
           "Kind": "Point",
           "Px": 0,
           "Py": -22.127161,
+          "Dx": 0,
+          "Dy": 0
+        },
+        {
+          "Name": "body_path",
+          "Kind": "Point",
+          "Px": 36.5821,
+          "Py": 0,
           "Dx": 0,
           "Dy": 0
         }

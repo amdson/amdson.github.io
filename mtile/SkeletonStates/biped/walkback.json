@@ -4,6 +4,19 @@
   "Skeleton": "biped",
   "Duration": 0.9,
   "Loop": true,
+  "Scene": {
+    "Guides": [
+      {
+        "Id": "g1",
+        "Kind": "Ground",
+        "X": 0,
+        "Y": 40,
+        "W": 0,
+        "H": 0,
+        "Label": "floor"
+      }
+    ]
+  },
   "Keyframes": [
     {
       "Time": 0,
@@ -45,20 +58,12 @@
           "Rotation": 0
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.3258176
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 1.9707963
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 0
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258178
         }
       ],
       "Additions": [
@@ -93,7 +98,7 @@
         },
         {
           "Bone": "arm_l_lower",
-          "Rotation": 1.1920929E-07
+          "Rotation": 1.1920929e-07
         },
         {
           "Bone": "arm_r_upper",
@@ -112,20 +117,12 @@
           "Rotation": 0
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.3258178
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 1.1707963
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 0
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258177
         }
       ],
       "Additions": [
@@ -179,20 +176,12 @@
           "Rotation": 0
         },
         {
-          "Bone": "foot_l",
-          "Rotation": -1.3258176
-        },
-        {
           "Bone": "leg_r_upper",
           "Rotation": 1.9707963
         },
         {
           "Bone": "leg_r_lower",
           "Rotation": 0
-        },
-        {
-          "Bone": "foot_r",
-          "Rotation": -1.3258178
         }
       ],
       "Additions": [
