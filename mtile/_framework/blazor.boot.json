@@ -1,15 +1,15 @@
 {
   "mainAssemblyName": "MTile.Web",
   "resources": {
-    "hash": "sha256-cQhqoB81a88aFZ3kokdbyBpPLSRNaOQfI/cmIUQTyus=",
+    "hash": "sha256-68gLX+Pww7VSIrf2wiaW2I2oN/loig8gXf0s0/Lha30=",
     "jsModuleNative": {
-      "dotnet.native.8.0.30.coh97oz4px.js": "sha256-/vcfaQdiiqz2OXYbCQKA0lRi6L2XZnTjf70WkZTdj2E="
+      "dotnet.native.8.0.30.dq4mcfmpm2.js": "sha256-/vcfaQdiiqz2OXYbCQKA0lRi6L2XZnTjf70WkZTdj2E="
     },
     "jsModuleRuntime": {
       "dotnet.runtime.8.0.30.8j5co2cpzw.js": "sha256-Iz92tEdLDz6hULg8toBVTeVi4QRnFEbFBy3lo3dbmEw="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-cFjlPfshrezZlfW31/hhEnSW9RWCw0D2xrTnPW953E0="
+      "dotnet.native.wasm": "sha256-3cxfcRBl5KO6AXkbg13XRls1pKd9gqS6aLghefteCa0="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -32,7 +32,7 @@
       "Microsoft.Extensions.Primitives.wasm": "sha256-6187ynEahDlSLMBvD4vAmiLpZ3clRb5xu6rM7O8AxNo=",
       "Microsoft.JSInterop.wasm": "sha256-r9dkR5134QvSR5zRWncgwA3QgGc2mbiRwhPteP2xbpk=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-vXbrJxN/hJ4fcUDVzXW+XhXQrPJExVIZ5uQbSKQLnsQ=",
-      "MTile.Web.wasm": "sha256-uZKes7xo9Jt5kRxLXdNvY5sD8Dpc47q2PjSXKDqjqOQ=",
+      "MTile.Web.wasm": "sha256-z63GaL4Yl+b8hM/6BLLx3xa6ZAmRxa8nX9yYeO0+WLk=",
       "nkast.Wasm.Audio.wasm": "sha256-KGwlNNGEYXve6o+MRBpViVuKmN6TJpYltOiJIjGOo6I=",
       "nkast.Wasm.Canvas.wasm": "sha256-C4hW1Iqj6tdYQ7x3s2Mbo0B6t7vd8LPIuE+3UNYrjaI=",
       "nkast.Wasm.Dom.wasm": "sha256-l4hf03MQb1wsk5N8TA7XxbsmxZqtsEf1zYGI1vg7cIg=",
@@ -70,7 +70,7 @@
       "Xna.Framework.Content.wasm": "sha256-SGqiWa/ozmxuDX7x4uKzJiGHxMkfDqfxG/4pibbBih0=",
       "Xna.Framework.Devices.wasm": "sha256-QeEJOxPXXMYq7e/4e0RNvj6Y/LwG0mTE1j1crIBtqPI=",
       "Xna.Framework.Game.wasm": "sha256-iF/K6vAg2npNf/e7ojxiNbw3mHxfMJGGgCITtjzmQrk=",
-      "Xna.Framework.Graphics.wasm": "sha256-58Dntzn62eF6OQPHS0BZBGky8X5XDw0KAoWi3d/a5pU=",
+      "Xna.Framework.Graphics.wasm": "sha256-iMZu9QZE+u9aZtlD6CsrD61Pg9SdYMpzNhzUH9Xn6N0=",
       "Xna.Framework.Input.wasm": "sha256-CECeZbwa16kY2V+zGpohmqSrj703anJ6WYxhShgH2sI=",
       "Xna.Framework.Media.wasm": "sha256-EjtrRnvmkwEYC17ixSpaUmAoHdzpurFNW42FR60tIlc=",
       "Xna.Framework.Storage.wasm": "sha256-s/qrPu7Tm7poRtBStodHVKfG3LQ4R0vW45QPRgfuPOM=",
