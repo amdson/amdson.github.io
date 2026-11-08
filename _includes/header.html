@@ -29,7 +29,7 @@
 
       <div class="trigger">
         {% for my_page in site.pages %}
-          {% if my_page.title and my_page.category != "project" %}
+          {% if my_page.title and my_page.category != "project" and my_page.nav != false %}
             <a class="page-link" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title | escape }}</a>
           {% endif %}
         {% endfor %}
