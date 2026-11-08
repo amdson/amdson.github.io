@@ -16,7 +16,6 @@ layout: default
       <p style="text-align:center">
         <a href="mailto:{{ cv.email }}">Email</a> &nbsp;/&nbsp;
         <a href="{{ cv.resume_pdf | prepend: site.baseurl }}">CV</a> &nbsp;/&nbsp;
-        <a href="{{ '/bio/' | prepend: site.baseurl }}">Bio</a> &nbsp;/&nbsp;
         {% if cv.scholar %}<a href="{{ cv.scholar }}">Scholar</a> &nbsp;/&nbsp;{% endif %}
         {% if cv.linkedin %}<a href="{{ cv.linkedin }}">LinkedIn</a> &nbsp;/&nbsp;{% endif %}
         <a href="https://github.com/{{ cv.github }}/">Github</a>
@@ -32,9 +31,6 @@ layout: default
   <table class="jb-inner"><tbody><tr>
     <td style="padding:16px;width:100%;vertical-align:middle">
       <h2>Research</h2>
-      <ul class="jb-summary">
-        {% for item in cv.summary %}<li>{{ item }}</li>{% endfor %}
-      </ul>
     </td>
   </tr></tbody></table>
 

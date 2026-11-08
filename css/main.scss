@@ -75,35 +75,6 @@ $on-laptop:        800px;
   }
 }
 
-// CV landing page
-.cv {
-  h2 {
-    font-size: 1.25em;
-    font-variant: small-caps;
-    letter-spacing: 0.04em;
-    border-bottom: 1px solid $grey-color-light;
-    padding-bottom: 2px;
-    margin: $spacing-unit 0 ($spacing-unit * 0.5);
-  }
-  .cv-header { text-align: center; margin-bottom: $spacing-unit * 0.5; }
-  .cv-name { font-size: 2.4em; margin-bottom: 4px; letter-spacing: -0.5px; }
-  .cv-contact { color: $grey-color-dark; margin: 0; .sep { margin: 0 8px; color: $grey-color-light; } }
-  .cv-entry { margin-bottom: $spacing-unit * 0.5; }
-  .cv-row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-  .cv-title { font-weight: 700; }
-  .cv-sub { font-style: italic; color: $grey-color-dark; }
-  .cv-right { white-space: nowrap; text-align: right; }
-  .cv-bullets { margin: 4px 0 0 $spacing-unit; }
-  .cv-pubs { margin-left: $spacing-unit; li { margin-bottom: 6px; } }
-  .cv-note { color: $grey-color; }
-  .cv-skills {
-    dt { font-weight: 700; float: left; clear: left; margin-right: 6px; }
-    dt::after { content: ":"; }
-    dd { margin-left: 0; margin-bottom: 4px; }
-  }
-  .cv-links { margin-left: $spacing-unit; .post-meta { margin-left: 6px; } }
-}
-
 // Landing page (layout after jonbarron.info, used with permission per its footer)
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 .jb {
@@ -118,6 +89,5 @@ $on-laptop:        800px;
   h2 { margin: 0; font-weight: normal; font-size: 22px; }
   p.name { padding-top: 20px; margin: 0; font-size: 32px; }
   .papertitle { font-weight: 700; }
-  .jb-summary { margin: 8px 0 0 20px; }
   .colored-box { color: black; padding: 20px; display: inline-block; border-radius: 10px; }
 }
