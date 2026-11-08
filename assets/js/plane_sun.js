@@ -1,709 +1,405 @@
-class Vector3 {
-	constructor( x = 0, y = 0, z = 0 ) {
+// Which side of the airplane is sunniest?
+//
+// Model: the plane flies the great circle between two airports at constant
+// speed. At each moment we compute the sub-solar point and ask how directly
+// the sun shines through the windows on each side. "Sunniness" for a side is
+// cos(angle between that side's window normal and the sun), clamped at 0, and
+// zero when the sun is below the horizon. 100% means the sun is exactly abeam
+// and on the horizon: straight in your eyes.
+//
+// Expects a global `markers` object: { ICAO: [name, city, country, lat, lon, IATA] }
+// and (optionally) the `tzlookup` global from tz-lookup for local-time input.
 
-		this.x = x;
-		this.y = y;
-		this.z = z;
+(function () {
+	"use strict";
 
-	}
-
-	set( x, y, z ) {
-
-		if ( z === undefined ) z = this.z;
-
-		this.x = x;
-		this.y = y;
-		this.z = z;
-
-		return this;
-
-	}
-
-	setScalar( scalar ) {
-
-		this.x = scalar;
-		this.y = scalar;
-		this.z = scalar;
-
-		return this;
-
-	}
-
-	setX( x ) {
-
-		this.x = x;
-
-		return this;
-
-	}
-
-	setY( y ) {
-
-		this.y = y;
-
-		return this;
-
-	}
-
-	setZ( z ) {
-
-		this.z = z;
-
-		return this;
-
-	}
-
-	setComponent( index, value ) {
-
-		switch ( index ) {
-
-			case 0: this.x = value; break;
-			case 1: this.y = value; break;
-			case 2: this.z = value; break;
-			default: throw new Error( 'index is out of range: ' + index );
-
+	// ---------------------------------------------------------------- vectors
+	class Vec3 {
+		constructor(x = 0, y = 0, z = 0) { this.x = x; this.y = y; this.z = z; }
+		clone() { return new Vec3(this.x, this.y, this.z); }
+		add(v) { this.x += v.x; this.y += v.y; this.z += v.z; return this; }
+		sub(v) { this.x -= v.x; this.y -= v.y; this.z -= v.z; return this; }
+		scale(s) { this.x *= s; this.y *= s; this.z *= s; return this; }
+		addScaled(v, s) { this.x += v.x * s; this.y += v.y * s; this.z += v.z * s; return this; }
+		dot(v) { return this.x * v.x + this.y * v.y + this.z * v.z; }
+		length() { return Math.sqrt(this.dot(this)); }
+		normalize() { const l = this.length() || 1; return this.scale(1 / l); }
+		static cross(a, b) {
+			return new Vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 		}
-
-		return this;
-
-	}
-
-	getComponent( index ) {
-
-		switch ( index ) {
-
-			case 0: return this.x;
-			case 1: return this.y;
-			case 2: return this.z;
-			default: throw new Error( 'index is out of range: ' + index );
-
+		angleTo(v) {
+			const c = this.dot(v) / (this.length() * v.length());
+			return Math.acos(Math.max(-1, Math.min(1, c)));
 		}
-
 	}
 
-	clone() {
-
-		return new this.constructor( this.x, this.y, this.z );
-
+	// Earth-fixed frame: x toward lat 0 / lon 0, y toward lon 90E, z toward the north pole.
+	function fromLatLon(latRad, lonRad) {
+		return new Vec3(Math.cos(latRad) * Math.cos(lonRad), Math.cos(latRad) * Math.sin(lonRad), Math.sin(latRad));
 	}
+	const DEG = Math.PI / 180;
 
-	copy( v ) {
-
-		this.x = v.x;
-		this.y = v.y;
-		this.z = v.z;
-
-		return this;
-
-	}
-
-	add( v) {
-		this.x += v.x;
-		this.y += v.y;
-		this.z += v.z;
-
-		return this;
-
-	}
-
-	addScalar( s ) {
-
-		this.x += s;
-		this.y += s;
-		this.z += s;
-
-		return this;
-
-	}
-
-	addVectors( a, b ) {
-
-		this.x = a.x + b.x;
-		this.y = a.y + b.y;
-		this.z = a.z + b.z;
-
-		return this;
-
-	}
-
-	addScaledVector( v, s ) {
-		this.x += v.x * s;
-		this.y += v.y * s;
-		this.z += v.z * s;
-
-		return this;
-
-	}
-
-	sub( v, w ) {
-
-		if ( w !== undefined ) {
-			return this.subVectors( v, w );
+	// ------------------------------------------------------------ great circle
+	// Position, forward direction, and left-window direction along the shortest
+	// great-circle route from r1 to r2, parameterised by fraction t in [0, 1].
+	class GreatCircle {
+		constructor(r1, r2) {
+			this.r1 = r1.clone().normalize();
+			this.theta = this.r1.angleTo(r2);
+			// Unit vector perpendicular to r1, in the plane of r1 and r2, pointing toward r2.
+			const proj = this.r1.clone().scale(r2.dot(this.r1));
+			this.rn = r2.clone().sub(proj).normalize();
 		}
-
-		this.x -= v.x;
-		this.y -= v.y;
-		this.z -= v.z;
-
-		return this;
-
+		position(t) {
+			const a = t * this.theta;
+			return this.r1.clone().scale(Math.cos(a)).addScaled(this.rn, Math.sin(a));
+		}
+		forward(t) {
+			const a = t * this.theta;
+			return this.r1.clone().scale(-Math.sin(a)).addScaled(this.rn, Math.cos(a));
+		}
+		// up x forward = left. (Northbound at the equator: x cross z = -y = west.)
+		left(t) { return Vec3.cross(this.position(t), this.forward(t)); }
+		distanceKm() { return this.theta * 6371; }
 	}
 
-	subScalar( s ) {
-		this.x -= s;
-		this.y -= s;
-		this.z -= s;
+	// --------------------------------------------------------------- the sun
+	// Low-precision solar position, after suncalc (Vladimir Agafonkin, BSD).
+	const dayMs = 86400000, J1970 = 2440588, J2000 = 2451545;
+	function toDays(date) { return date.valueOf() / dayMs - 0.5 + J1970 - J2000; }
+	const OBLIQUITY = 23.4397 * DEG;
+	function rightAscension(l) { return Math.atan2(Math.sin(l) * Math.cos(OBLIQUITY), Math.cos(l)); }
+	function declination(l) { return Math.asin(Math.sin(OBLIQUITY) * Math.sin(l)); }
+	function eclipticLongitude(d) {
+		const M = (357.5291 + 0.98560028 * d) * DEG;
+		const C = (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M)) * DEG;
+		return M + C + 102.9372 * DEG + Math.PI;
+	}
+	function greenwichSiderealTime(d) { return (280.16 + 360.9856235 * d) * DEG; }
 
-		return this;
-
+	// Unit vector from Earth's centre toward the sun, i.e. through the sub-solar point.
+	function sunDirection(date) {
+		const d = toDays(date);
+		const L = eclipticLongitude(d);
+		const lat = declination(L);
+		const lon = rightAscension(L) - greenwichSiderealTime(d);
+		return fromLatLon(lat, lon);
 	}
 
-	subVectors( a, b ) {
+	// Sun counts as "up" a little past geometric horizon: at 11 km the horizon dips ~3.4 deg.
+	const HORIZON_DIP = Math.sin(3.4 * DEG);
 
-		this.x = a.x - b.x;
-		this.y = a.y - b.y;
-		this.z = a.z - b.z;
-
-		return this;
-
+	// ------------------------------------------------------------ simulation
+	function simulate(dep, arr, depTime, arrTime, steps) {
+		const path = new GreatCircle(fromLatLon(dep.lat * DEG, dep.lon * DEG), fromLatLon(arr.lat * DEG, arr.lon * DEG));
+		const t0 = depTime.valueOf(), t1 = arrTime.valueOf();
+		const left = [], right = [], sunUp = [], samples = [];
+		for (let i = 0; i <= steps; i++) {
+			const t = i / steps;
+			const when = new Date(t0 + t * (t1 - t0));
+			const s = sunDirection(when);
+			const r = path.position(t);
+			const up = r.dot(s) > -HORIZON_DIP;
+			const ws = path.left(t).dot(s);
+			left.push(up ? Math.max(0, ws) : 0);
+			right.push(up ? Math.max(0, -ws) : 0);
+			sunUp.push(up);
+			samples.push({ when, r, s });
+		}
+		return { path, left, right, sunUp, samples, t0, t1 };
 	}
 
-	multiply( v, w ) {
-		this.x *= v.x;
-		this.y *= v.y;
-		this.z *= v.z;
-
-		return this;
-
-	}
-
-	multiplyScalar( scalar ) {
-
-		this.x *= scalar;
-		this.y *= scalar;
-		this.z *= scalar;
-
-		return this;
-
-	}
-
-	multiplyVectors( a, b ) {
-
-		this.x = a.x * b.x;
-		this.y = a.y * b.y;
-		this.z = a.z * b.z;
-
-		return this;
-
-	}
-
-	divide( v ) {
-
-		this.x /= v.x;
-		this.y /= v.y;
-		this.z /= v.z;
-
-		return this;
-
-	}
-
-	divideScalar( scalar ) {
-
-		return this.multiplyScalar( 1 / scalar );
-
-	}
-
-	min( v ) {
-
-		this.x = Math.min( this.x, v.x );
-		this.y = Math.min( this.y, v.y );
-		this.z = Math.min( this.z, v.z );
-
-		return this;
-
-	}
-
-	max( v ) {
-
-		this.x = Math.max( this.x, v.x );
-		this.y = Math.max( this.y, v.y );
-		this.z = Math.max( this.z, v.z );
-
-		return this;
-
-	}
-
-	clamp( min, max ) {
-
-		// assumes min < max, componentwise
-
-		this.x = Math.max( min.x, Math.min( max.x, this.x ) );
-		this.y = Math.max( min.y, Math.min( max.y, this.y ) );
-		this.z = Math.max( min.z, Math.min( max.z, this.z ) );
-
-		return this;
-
-	}
-
-	clampScalar( minVal, maxVal ) {
-
-		this.x = Math.max( minVal, Math.min( maxVal, this.x ) );
-		this.y = Math.max( minVal, Math.min( maxVal, this.y ) );
-		this.z = Math.max( minVal, Math.min( maxVal, this.z ) );
-
-		return this;
-
-	}
-
-	clampLength( min, max ) {
-
-		const length = this.length();
-
-		return this.divideScalar( length || 1 ).multiplyScalar( Math.max( min, Math.min( max, length ) ) );
-
-	}
-
-	floor() {
-
-		this.x = Math.floor( this.x );
-		this.y = Math.floor( this.y );
-		this.z = Math.floor( this.z );
-
-		return this;
-
-	}
-
-	ceil() {
-
-		this.x = Math.ceil( this.x );
-		this.y = Math.ceil( this.y );
-		this.z = Math.ceil( this.z );
-
-		return this;
-
-	}
-
-	round() {
-
-		this.x = Math.round( this.x );
-		this.y = Math.round( this.y );
-		this.z = Math.round( this.z );
-
-		return this;
-
-	}
-
-	roundToZero() {
-
-		this.x = ( this.x < 0 ) ? Math.ceil( this.x ) : Math.floor( this.x );
-		this.y = ( this.y < 0 ) ? Math.ceil( this.y ) : Math.floor( this.y );
-		this.z = ( this.z < 0 ) ? Math.ceil( this.z ) : Math.floor( this.z );
-
-		return this;
-
-	}
-
-	negate() {
-
-		this.x = - this.x;
-		this.y = - this.y;
-		this.z = - this.z;
-
-		return this;
-
-	}
-
-	dot( v ) {
-
-		return this.x * v.x + this.y * v.y + this.z * v.z;
-
-	}
-
-	lengthSq() {
-
-		return this.x * this.x + this.y * this.y + this.z * this.z;
-
-	}
-
-	length() {
-
-		return Math.sqrt( this.x * this.x + this.y * this.y + this.z * this.z );
-
-	}
-
-	manhattanLength() {
-
-		return Math.abs( this.x ) + Math.abs( this.y ) + Math.abs( this.z );
-
-	}
-
-	normalize() {
-
-		return this.divideScalar( this.length() || 1 );
-
-	}
-
-	setLength( length ) {
-
-		return this.normalize().multiplyScalar( length );
-
-	}
-
-	lerp( v, alpha ) {
-
-		this.x += ( v.x - this.x ) * alpha;
-		this.y += ( v.y - this.y ) * alpha;
-		this.z += ( v.z - this.z ) * alpha;
-
-		return this;
-
-	}
-
-	lerpVectors( v1, v2, alpha ) {
-
-		this.x = v1.x + ( v2.x - v1.x ) * alpha;
-		this.y = v1.y + ( v2.y - v1.y ) * alpha;
-		this.z = v1.z + ( v2.z - v1.z ) * alpha;
-
-		return this;
-
-	}
-
-	crossVectors( a, b ) {
-
-		const ax = a.x, ay = a.y, az = a.z;
-		const bx = b.x, by = b.y, bz = b.z;
-
-		this.x = ay * bz - az * by;
-		this.y = az * bx - ax * bz;
-		this.z = ax * by - ay * bx;
-
-		return this;
-
-	}
-
-	projectOnVector( v ) {
-
-		const denominator = v.lengthSq();
-
-		if ( denominator === 0 ) return this.set( 0, 0, 0 );
-
-		const scalar = v.dot( this ) / denominator;
-
-		return this.copy( v ).multiplyScalar( scalar );
-
-	}
-
-	projectOnPlane( planeNormal ) {
-
-		_vector.copy( this ).projectOnVector( planeNormal );
-
-		return this.sub( _vector );
-
-	}
-
-	reflect( normal ) {
-
-		// reflect incident vector off plane orthogonal to normal
-		// normal is assumed to have unit length
-
-		return this.sub( _vector.copy( normal ).multiplyScalar( 2 * this.dot( normal ) ) );
-
-	}
-
-	angleTo( v ) {
-
-		const denominator = Math.sqrt( this.lengthSq() * v.lengthSq() );
-
-		if ( denominator === 0 ) return Math.PI / 2;
-
-		const theta = this.dot( v ) / denominator;
-		// clamp, to handle numerical problems
-
-		return Math.acos(theta);
-
-	}
-
-	distanceTo( v ) {
-
-		return Math.sqrt( this.distanceToSquared( v ) );
-
-	}
-
-	distanceToSquared( v ) {
-
-		const dx = this.x - v.x, dy = this.y - v.y, dz = this.z - v.z;
-
-		return dx * dx + dy * dy + dz * dz;
-
-	}
-
-	manhattanDistanceTo( v ) {
-
-		return Math.abs( this.x - v.x ) + Math.abs( this.y - v.y ) + Math.abs( this.z - v.z );
-
-	}
-
-
-	setFromSphericalCoords( radius, phi, theta ) {
-
-		const sinPhiRadius = Math.sin( phi ) * radius;
-
-		this.x = sinPhiRadius * Math.sin( theta );
-		this.y = Math.cos( phi ) * radius;
-		this.z = sinPhiRadius * Math.cos( theta );
-
-		return this;
-
-	}
-}
-
-Vector3.prototype.isVector3 = true;
-
-const _vector = /*@__PURE__*/ new Vector3();
-
-class SpherePath {
-	constructor( r1, r2, t1, t2, radius) {
-		this.r1 = r1;
-		this.r2 = r2;
-		this.theta = r1.angleTo(r2); 
-		this.rn = r2.clone().sub(r2.clone().projectOnVector(r1)).normalize(); 		
-		this.t1 = t1; 
-		this.t2 = t2; 
-		this.radius = radius; 
-	}
-
-	interp(t) {
-		var theta = t*this.theta/(this.t2 - this.t1)
-		var r = this.r1.clone(); 
-		r.multiplyScalar(Math.cos(theta));
-		return r.addScaledVector(this.rn, Math.sin(theta)); 
-	}
-
-	interp_v(t) {
-		var theta = t*this.theta/(this.t2 - this.t1);
-		var r = this.r1.clone(); 
-		r.multiplyScalar(-Math.sin(theta));
-		r.addScaledVector(this.rn, Math.cos(theta)); 
-		return r; 
-	}
-
-	interp_w(t) {
-		var r = this.interp(t); 
-		var v = this.interp_v(t); 
-		return r.crossVectors(r, v); 
-	}
-}
-
-function from_coords_deg(lat_i, long_i) {
-	lat_i = Math.PI*lat_i/180; long_i = Math.PI*long_i/180; 
-	return new Vector3(Math.cos(lat_i)*Math.cos(long_i), Math.cos(lat_i)*Math.sin(long_i), Math.sin(lat_i));
-}
-
-function from_coords(lat_i, long_i) {
-	return new Vector3(Math.cos(lat_i)*Math.cos(long_i), Math.cos(lat_i)*Math.sin(long_i), Math.sin(lat_i));
-}
-
-// var lat_i = 51; var long_i = 0.12; var lat_f = 40; var long_f = 4; 
-// var r_i = from_coords_deg(lat_i, long_i); 
-// var r_f = from_coords_deg(lat_f, long_f); 
-// var path = new SpherePath(r_i, r_f, 0, 1, 100); 
-
-// for (var i = 0; i < 10; i++) {
-// 	r = path.interp(i/10); 
-// 	v = path.interp_v(i/10); 
-// 	w = path.interp_w(i/10); 
-// 	console.log(r, v, w); 
-// }
-
-var PI   = Math.PI,
-    sin  = Math.sin,
-    cos  = Math.cos,
-    tan  = Math.tan,
-    asin = Math.asin,
-    atan = Math.atan2,
-    acos = Math.acos,
-    rad  = PI / 180;
-
-var dayMs = 1000 * 60 * 60 * 24,
-    J1970 = 2440588,
-    J2000 = 2451545;
-
-function toJulian(date) { return date.valueOf() / dayMs - 0.5 + J1970; }
-function fromJulian(j)  { return new Date((j + 0.5 - J1970) * dayMs); }
-function toDays(date)   { return toJulian(date) - J2000; }
-
-function siderealTime(d, lw) { return rad * (280.16 + 360.9856235 * d) - lw; }
-
-
-// general calculations for position
-
-var e = rad * 23.4397; // obliquity of the Earth
-
-function rightAscension(l, b) { return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l)); }
-function declination(l, b)    { return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l)); }
-
-// general sun calculations
-function solarMeanAnomaly(d) { return rad * (357.5291 + 0.98560028 * d); }
-function eclipticLongitude(M) {
-    var C = rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M)), // equation of center
-        P = rad * 102.9372; // perihelion of the Earth
-    return M + C + P + PI;
-}
-
-function sunCoords(d) {
-    var M = solarMeanAnomaly(d),
-        L = eclipticLongitude(M);
-    return {
-        dec: declination(L, 0),
-        ra: rightAscension(L, 0) + siderealTime(d, PI)
-    };
-}
-
-class SunPath {
-	constructor(start_date, end_date) {
-		this.start_date = start_date; //Start/end date in days. 
-		this.end_date = end_date; 
-	}
-
-	interp(t) {
-		var date = t*(this.end_date-this.start_date) + this.start_date; 
-		var s1_coords = sunCoords(date); 
-		var slat1 = s1_coords['dec'],
-		slong1 = s1_coords['ra']; 
-		console.log(slat1, slong1); 
-		return from_coords(slat1, slong1); 
-	}
-}
-
-function projVecCircle(ctx, vec, radius=2, fill=false) {
-	var svec = vec.clone().multiplyScalar(75);
-	svec.z = -svec.z
-	svec.add(new Vector3(150, 150, 100)); 
-	// console.log("scaled vec", svec); 
-	var vx = svec.y, vy = svec.z; 
-	ctx.beginPath();
-	ctx.arc(vx, vy, radius, 0, 2 * Math.PI);
-	ctx.stroke(); 
-	if(fill) {
-		ctx.fill(); 
-	}
-	
-}
-
-$(document).ready(function () {
-	var c1 = document.getElementById("departure-time");
-	var c2 = document.getElementById("arrival-time");
-	var s1 = document.getElementById("departure-loc");
-	var s2 = document.getElementById("arrival-loc");
-	for (acr in markers) {
-		fields = markers[acr]; 
-		var option = new Option(acr + " (" + fields[0] + " " + fields[2] + ")", acr);
-		s1.append(option); 
-	}   
-	for (acr in markers) {
-		fields = markers[acr]; 
-		var option = new Option(acr + " (" + fields[0] + " " + fields[2] + ")", acr);
-		s2.append(option); 
-	}   
-	$("select").select2();
-	var b = document.getElementById("go-button")
-	b.addEventListener('click', function () {
-		if(s1.value.length > 0 && s2.value.length > 0 && c1.value.length > 0 && c2.value.length > 0) {
-			var start_date = toDays(new Date(c1.value)); 
-			var end_date = toDays(new Date(c2.value)); 
-			console.log(c1.value, c2.value);
-			console.log("start Julien", toJulian(new Date(c1.value))); 
-			console.log("start date", start_date); 
-
-			if (end_date <= start_date) {
-				alert("Flight must arrive after departure."); 
+	// -------------------------------------------------------------- colours
+	// Blue (no sun) -> bright yellow (sun straight in your eyes).
+	const STOPS = [
+		[0.00, [0x1e, 0x3a, 0x8a]],
+		[0.35, [0x4c, 0x7a, 0xd6]],
+		[0.65, [0xd7, 0xdc, 0xa8]],
+		[1.00, [0xff, 0xe6, 0x00]],
+	];
+	function colormap(v) {
+		v = Math.max(0, Math.min(1, v));
+		for (let i = 1; i < STOPS.length; i++) {
+			if (v <= STOPS[i][0]) {
+				const [a, ca] = STOPS[i - 1], [b, cb] = STOPS[i];
+				const f = (v - a) / (b - a);
+				const c = ca.map((x, k) => Math.round(x + (cb[k] - x) * f));
+				return `rgb(${c[0]},${c[1]},${c[2]})`;
 			}
-
-			var sun_path = new SunPath(start_date, end_date); 
-
-			var acr1 = s1.value; var acr2 = s2.value; 
-			var f1 = markers[acr1]; var f2 = markers[acr2]; 
-			var lat1 = parseFloat(f1[3]),
-			long1 = parseFloat(f1[4]),
-			lat2 = parseFloat(f2[3]),
-			long2 = parseFloat(f2[4]);
-
-			// console.log("Airport coordinates"); 
-			// console.log(acr1, lat1, long1); 
-			// console.log(acr2, lat2, long2); 
-
-			var r1 = from_coords_deg(lat1, long1); 
-			var r2 = from_coords_deg(lat2, long2); 
-			var flight_path = new SpherePath(r1, r2, 0, 1, 100); 
-			
-			var canvas = document.getElementById("globe-canvas");
-			var ctx = canvas.getContext("2d");
-
-			var globe_center = new Vector3(0, 0, 0); 
-			var north_pole = from_coords(PI/2, 0);
-			var south_pole = from_coords(-PI/2, 0); 
-			ctx.fillStyle = "green";
-			projVecCircle(ctx, north_pole, 2, true);
-			projVecCircle(ctx, south_pole, 2, true); 
-			// for (acr in markers) {
-			// 	var f1 = markers[acr];
-			// 	var lat1 = parseFloat(f1[3]),
-			// 	long1 = parseFloat(f1[4]);
-			// 	var v = from_coords_deg(lat1, long1); 
-			// 	projVec(ctx, v, 2, true);
-			// }
-
-			left_sunlight = [];
-			right_sunlight = []; 
-
-			ctx.strokeStyle = "black";
-			projVecCircle(ctx, globe_center, 75); 
-			for (var i = 0; i <= 100; i++) {
-				var t = i / 100; 
-				var sun_coord = sun_path.interp(t); //Normalized vector. 
-				ctx.fillStyle = "yellow";
-				projVecCircle(ctx, sun_coord, 0.7, true); 
-				var flight_coord = flight_path.interp(t); 
-				ctx.fillStyle = "blue";
-				projVecCircle(ctx, flight_coord, 2, true); 
-
-				var pos_sunlight = 1;
-				if(flight_coord.dot(sun_coord) < 0) {pos_sunlight = 0;} //Ignore atmospheric effects. )
-				
-				var window_dir = flight_path.interp_w(t);
-				var w_sun = window_dir.dot(sun_coord);  
-				right_sunlight.push(Math.max(w_sun, 0)*pos_sunlight); 
-				left_sunlight.push(Math.max(-w_sun, 0)*pos_sunlight); 
-			}
-			// //x-axis
-			// ctx.beginPath();
-			// ctx.moveTo(295, 150);
-			// ctx.lineTo(500, 150); 
-			// ctx.stroke(); 
-			// //y-axis
-			// ctx.beginPath();
-			// ctx.moveTo(300, 155);
-			// ctx.lineTo(300, 0); 
-			// ctx.stroke(); 
-
-			// ctx.beginPath();
-			// ctx.moveTo(300, 150-right_sunlight[0]);
-			// for (var i = 1; i < right_sunlight.length; i++) {
-			// 	var s1 = right_sunlight[i];
-			// 	ctx.lineTo(2*i+300, 150-s1);
-			// }
-			// ctx.stroke();
-			// ctx.beginPath();
-			// ctx.moveTo(300, 150-left_sunlight[0]);
-			// for (var i = 1; i < left_sunlight.length; i++) {
-			// 	var s1 = left_sunlight[i];
-			// 	ctx.lineTo(2*i+300, 150-s1);
-			// }
-			// ctx.stroke();
 		}
+		return "rgb(255,230,0)";
+	}
+
+	// --------------------------------------------------------------- drawing
+	function setupCanvas(canvas) {
+		const dpr = window.devicePixelRatio || 1;
+		const w = canvas.clientWidth || canvas.width, h = canvas.clientHeight || canvas.height;
+		canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+		const ctx = canvas.getContext("2d");
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+		ctx.clearRect(0, 0, w, h);
+		return { ctx, w, h };
+	}
+
+	function drawBar(canvas, values) {
+		const { ctx, w, h } = setupCanvas(canvas);
+		const n = values.length;
+		for (let i = 0; i < n; i++) {
+			ctx.fillStyle = colormap(values[i]);
+			const x0 = Math.floor((i / n) * w), x1 = Math.ceil(((i + 1) / n) * w);
+			ctx.fillRect(x0, 0, x1 - x0, h);
+		}
+	}
+
+	function drawLegend(canvas) {
+		const { ctx, w, h } = setupCanvas(canvas);
+		for (let x = 0; x < w; x++) { ctx.fillStyle = colormap(x / (w - 1)); ctx.fillRect(x, 0, 1, h); }
+	}
+
+	// Orthographic globe centred on the midpoint of the route.
+	function drawGlobe(canvas, sim, dep, arr) {
+		const { ctx, w, h } = setupCanvas(canvas);
+		const R = Math.min(w, h) / 2 - 6, cx = w / 2, cy = h / 2;
+		const mid = sim.path.position(0.5);
+		const north = new Vec3(0, 0, 1);
+		let up = north.clone().sub(mid.clone().scale(north.dot(mid)));
+		if (up.length() < 1e-6) up = sim.path.forward(0.5);
+		up.normalize();
+		const rightAxis = Vec3.cross(up, mid).normalize();
+		const project = v => ({ x: cx + R * v.dot(rightAxis), y: cy - R * v.dot(up), depth: v.dot(mid) });
+
+		// Night side at mid-flight, shaded per pixel.
+		// putImageData ignores the DPR transform, so work in backing-store pixels here.
+		const sunMid = sim.samples[Math.floor(sim.samples.length / 2)].s;
+		const dpr = window.devicePixelRatio || 1, Rp = R * dpr;
+		const img = ctx.createImageData(Math.round(2 * Rp), Math.round(2 * Rp));
+		for (let py = 0; py < img.height; py++) {
+			for (let px = 0; px < img.width; px++) {
+				const nx = (px - Rp) / Rp, ny = -(py - Rp) / Rp, rr = nx * nx + ny * ny;
+				if (rr > 1) continue;
+				const nz = Math.sqrt(1 - rr);
+				const p = rightAxis.clone().scale(nx).addScaled(up, ny).addScaled(mid, nz);
+				const day = p.dot(sunMid) > 0;
+				const k = 4 * (py * img.width + px);
+				if (day) { img.data[k] = 235; img.data[k + 1] = 240; img.data[k + 2] = 250; }
+				else { img.data[k] = 190; img.data[k + 1] = 200; img.data[k + 2] = 225; }
+				img.data[k + 3] = 255;
+			}
+		}
+		ctx.putImageData(img, Math.round((cx - R) * dpr), Math.round((cy - R) * dpr));
+
+		// Graticule every 30 degrees (front side only).
+		ctx.strokeStyle = "rgba(0,0,0,0.12)"; ctx.lineWidth = 1;
+		const strokePath = pts => {
+			ctx.beginPath(); let pen = false;
+			for (const v of pts) {
+				const p = project(v);
+				if (p.depth < 0) { pen = false; continue; }
+				if (pen) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y);
+				pen = true;
+			}
+			ctx.stroke();
+		};
+		for (let lat = -60; lat <= 60; lat += 30) {
+			const pts = []; for (let lon = -180; lon <= 180; lon += 3) pts.push(fromLatLon(lat * DEG, lon * DEG));
+			strokePath(pts);
+		}
+		for (let lon = -180; lon < 180; lon += 30) {
+			const pts = []; for (let lat = -90; lat <= 90; lat += 3) pts.push(fromLatLon(lat * DEG, lon * DEG));
+			strokePath(pts);
+		}
+		ctx.strokeStyle = "#333"; ctx.lineWidth = 1.5;
+		ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.stroke();
+
+		// Sub-solar track.
+		for (const smp of sim.samples) {
+			const p = project(smp.s);
+			ctx.fillStyle = p.depth >= 0 ? "#e6b800" : "rgba(230,184,0,0.25)";
+			ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI); ctx.fill();
+		}
+		// Flight path.
+		ctx.strokeStyle = "#1e3a8a"; ctx.lineWidth = 2.5;
+		strokePath(sim.samples.map(smp => smp.r));
+		const mark = (v, label) => {
+			const p = project(v);
+			ctx.fillStyle = "#1e3a8a"; ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, 2 * Math.PI); ctx.fill();
+			ctx.fillStyle = "#111"; ctx.font = "12px sans-serif"; ctx.fillText(label, p.x + 6, p.y - 6);
+		};
+		mark(sim.samples[0].r, dep.code);
+		mark(sim.samples[sim.samples.length - 1].r, arr.code);
+		// North pole marker.
+		const np = project(north);
+		if (np.depth >= 0) { ctx.fillStyle = "#111"; ctx.font = "11px sans-serif"; ctx.fillText("N", np.x - 3, np.y - 5); }
+	}
+
+	// ----------------------------------------------------------- time zones
+	function tzOffsetMinutes(date, tz) {
+		const parts = new Intl.DateTimeFormat("en-US", {
+			timeZone: tz, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit",
+			hour: "2-digit", minute: "2-digit", second: "2-digit",
+		}).formatToParts(date);
+		const m = {}; for (const p of parts) m[p.type] = p.value;
+		const asUtc = Date.UTC(+m.year, +m.month - 1, +m.day, +m.hour, +m.minute, +m.second);
+		return (asUtc - date.valueOf()) / 60000;
+	}
+	// "YYYY-MM-DDTHH:MM" wall-clock time in an IANA zone -> Date.
+	function localToUtc(isoLocal, tz) {
+		const naive = Date.parse(isoLocal + ":00Z");
+		let guess = new Date(naive);
+		for (let i = 0; i < 2; i++) guess = new Date(naive - tzOffsetMinutes(guess, tz) * 60000);
+		return guess;
+	}
+	function airportTz(ap) {
+		if (typeof tzlookup !== "function") return null;
+		try { return tzlookup(ap.lat, ap.lon); } catch (e) { return null; }
+	}
+
+	// ------------------------------------------------------------------ UI
+	const KEEP_UPPER = new Set(["USA", "UK", "UAE"]);
+	function titleCase(s) {
+		return s.split(" ").map(w => KEEP_UPPER.has(w) ? w : w.charAt(0) + w.slice(1).toLowerCase()).join(" ");
+	}
+	function airport(code) {
+		const f = markers[code];
+		return { code, iata: f[5], name: titleCase(f[0]), city: titleCase(f[1]), country: titleCase(f[2]),
+			lat: parseFloat(f[3]), lon: parseFloat(f[4]) };
+	}
+	function fmtHours(ms) {
+		const h = Math.floor(ms / 3600000), m = Math.round((ms % 3600000) / 60000);
+		return `${h}h ${String(m).padStart(2, "0")}m`;
+	}
+	function fmtTime(date, tz) {
+		const opts = { hour: "2-digit", minute: "2-digit", hourCycle: "h23", month: "short", day: "numeric", timeZoneName: "short" };
+		if (tz) opts.timeZone = tz;
+		return new Intl.DateTimeFormat("en-US", opts).format(date);
+	}
+
+	document.addEventListener("DOMContentLoaded", function () {
+		const $ = id => document.getElementById(id);
+		const depSel = $("departure-loc"), arrSel = $("arrival-loc");
+		const depTimeIn = $("departure-time"), arrTimeIn = $("arrival-time");
+		const utcBox = $("utc-mode");
+		const result = $("result"), headline = $("headline"), errBox = $("error");
+		const tip = $("bar-tooltip");
+
+		// Populate the pickers, sorted by IATA code.
+		const codes = Object.keys(markers).sort((a, b) => markers[a][5].localeCompare(markers[b][5]));
+		for (const sel of [depSel, arrSel]) {
+			for (const code of codes) {
+				const ap = airport(code);
+				sel.append(new Option(`${ap.iata} · ${ap.name} (${ap.city}, ${ap.country}) · ${code}`, code));
+			}
+		}
+		if (window.jQuery && jQuery.fn.select2) {
+			jQuery(depSel).select2({ placeholder: "Departure airport", width: "100%" });
+			jQuery(arrSel).select2({ placeholder: "Arrival airport", width: "100%" });
+		}
+
+		// Sensible defaults: SFO -> LHR, departing today at 16:00 local, 10h30 flight.
+		depSel.value = "KSFO"; arrSel.value = "EGLL";
+		if (window.jQuery) { jQuery(depSel).trigger("change"); jQuery(arrSel).trigger("change"); }
+		const today = new Date();
+		const pad = n => String(n).padStart(2, "0");
+		const ymd = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+		depTimeIn.value = `${ymd}T16:00`;
+		const tomorrow = new Date(today.valueOf() + dayMs);
+		arrTimeIn.value = `${tomorrow.getFullYear()}-${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}T10:30`;
+
+		function updateTzLabels() {
+			const showTz = (sel, label) => {
+				const code = sel.value;
+				if (!code || utcBox.checked) { label.textContent = utcBox.checked ? "UTC" : ""; return; }
+				const tz = airportTz(airport(code));
+				label.textContent = tz ? `local time (${tz})` : "UTC (time zone unknown)";
+			};
+			showTz(depSel, $("departure-tz")); showTz(arrSel, $("arrival-tz"));
+		}
+		for (const el of [depSel, arrSel, utcBox]) el.addEventListener("change", updateTzLabels);
+		updateTzLabels();
+
+		let lastSim = null;
+
+		function run() {
+			errBox.hidden = true;
+			if (!depSel.value || !arrSel.value || !depTimeIn.value || !arrTimeIn.value) {
+				return showError("Pick both airports and both times.");
+			}
+			const dep = airport(depSel.value), arr = airport(arrSel.value);
+			if (dep.code === arr.code) return showError("Departure and arrival airports are the same.");
+			const depTz = utcBox.checked ? null : airportTz(dep);
+			const arrTz = utcBox.checked ? null : airportTz(arr);
+			const depTime = depTz ? localToUtc(depTimeIn.value, depTz) : new Date(depTimeIn.value + ":00Z");
+			const arrTime = arrTz ? localToUtc(arrTimeIn.value, arrTz) : new Date(arrTimeIn.value + ":00Z");
+			if (isNaN(depTime) || isNaN(arrTime)) return showError("Could not read the times.");
+			const durMs = arrTime - depTime;
+			if (durMs <= 0) return showError("The flight must arrive after it departs (check the time zones).");
+			if (durMs > 30 * 3600000) return showError("That flight is longer than 30 hours. Check the dates.");
+
+			const sim = simulate(dep, arr, depTime, arrTime, 240);
+			lastSim = sim;
+			const peakL = Math.max(...sim.left), peakR = Math.max(...sim.right);
+			const meanL = sim.left.reduce((a, b) => a + b, 0) / sim.left.length;
+			const meanR = sim.right.reduce((a, b) => a + b, 0) / sim.right.length;
+			const pct = v => `${Math.round(v * 100)}%`;
+
+			let verdict;
+			if (peakL < 0.02 && peakR < 0.02) verdict = "Neither side gets any direct sun. Sit wherever you like.";
+			else if (Math.abs(peakL - peakR) < 0.05) verdict = "Both sides get about the same peak sun.";
+			else verdict = `The ${peakL > peakR ? "left" : "right"} side is sunnier.`;
+			headline.textContent = verdict;
+
+			$("peak-left").textContent = pct(peakL);
+			$("peak-right").textContent = pct(peakR);
+			$("mean-left").textContent = pct(meanL);
+			$("mean-right").textContent = pct(meanR);
+			$("route-summary").textContent =
+				`${dep.iata} → ${arr.iata} · ${Math.round(sim.path.distanceKm()).toLocaleString()} km great circle · ${fmtHours(durMs)} · ` +
+				`departs ${fmtTime(depTime, depTz)}, arrives ${fmtTime(arrTime, arrTz)}`;
+
+			// Unhide before drawing so the canvases have real layout sizes.
+			result.hidden = false;
+			drawBar($("bar-left"), sim.left);
+			drawBar($("bar-right"), sim.right);
+			drawTicks($("bar-ticks"), durMs);
+			drawGlobe($("globe-canvas"), sim, dep, arr);
+		}
+
+		function drawTicks(el, durMs) {
+			el.innerHTML = "";
+			const hours = durMs / 3600000;
+			const step = hours > 16 ? 4 : hours > 8 ? 2 : 1;
+			for (let h = 0; h <= hours + 1e-9; h += step) {
+				const span = document.createElement("span");
+				span.textContent = `${h}h`;
+				span.style.left = `${(h / hours) * 100}%`;
+				el.appendChild(span);
+			}
+		}
+
+		function showError(msg) { errBox.textContent = msg; errBox.hidden = false; result.hidden = true; }
+
+		// Hover readout on the bars.
+		for (const side of ["left", "right"]) {
+			const canvas = $(`bar-${side}`);
+			canvas.addEventListener("mousemove", ev => {
+				if (!lastSim) return;
+				const rect = canvas.getBoundingClientRect();
+				const f = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+				const i = Math.min(lastSim[side].length - 1, Math.floor(f * lastSim[side].length));
+				const when = new Date(lastSim.t0 + f * (lastSim.t1 - lastSim.t0));
+				tip.textContent = `+${fmtHours(when - lastSim.t0)} · ${fmtTime(when, "UTC")} · ${side}: ${Math.round(lastSim[side][i] * 100)}%` +
+					(lastSim.sunUp[i] ? "" : " (night)");
+				tip.style.left = `${ev.pageX + 12}px`; tip.style.top = `${ev.pageY + 12}px`;
+				tip.hidden = false;
+			});
+			canvas.addEventListener("mouseleave", () => { tip.hidden = true; });
+		}
+
+		drawLegend($("bar-legend"));
+		$("go-button").addEventListener("click", run);
+		run();
 	});
-});
 
-
-
+	// Exposed for testing in a console.
+	window.planeSun = { sunDirection, GreatCircle, fromLatLon, simulate, colormap, localToUtc };
+})();
