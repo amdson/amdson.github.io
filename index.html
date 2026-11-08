@@ -1,17 +1,114 @@
 ---
 layout: default
 ---
+{% assign cv = site.data.cv %}
+<div class="jb">
+<table class="jb-outer"><tbody><tr><td style="padding:0px">
 
-<div class="home">
-  <h1 class="page-heading">Posts</h1>
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title | escape }}</a>
-        </h2>
-      </li>
+  <table class="jb-inner"><tbody><tr>
+    <td style="padding:2.5%;{% if cv.photo %}width:63%;{% endif %}vertical-align:middle">
+      <p class="name" style="text-align:center">{{ cv.name }}</p>
+      <p>
+        I'm a postdoc in <a href="https://bioeng.berkeley.edu/person/taner-sen">Dr. Taner Sen</a>'s lab at the <a href="https://www.ars.usda.gov/">USDA Agricultural Research Service</a> in Albany, CA, working on efficient continued training of genomic sequence models.
+        I did my PhD in Applied Science and Technology at <a href="https://www.berkeley.edu/">UC Berkeley</a> (2020–2025), with concentrations in machine learning, bioinformatics, and biophysics.
+        Before that I did my BS in Electrical Engineering and Computer Science, also at Berkeley.
+      </p>
+      <p style="text-align:center">
+        <a href="mailto:{{ cv.email }}">Email</a> &nbsp;/&nbsp;
+        <a href="{{ cv.resume_pdf | prepend: site.baseurl }}">CV</a> &nbsp;/&nbsp;
+        <a href="{{ '/bio/' | prepend: site.baseurl }}">Bio</a> &nbsp;/&nbsp;
+        {% if cv.scholar %}<a href="{{ cv.scholar }}">Scholar</a> &nbsp;/&nbsp;{% endif %}
+        {% if cv.linkedin %}<a href="{{ cv.linkedin }}">LinkedIn</a> &nbsp;/&nbsp;{% endif %}
+        <a href="https://github.com/{{ cv.github }}/">Github</a>
+      </p>
+    </td>
+    {% if cv.photo %}
+    <td style="padding:2.5%;width:37%;max-width:37%">
+      <img style="width:100%;max-width:100%;object-fit:cover;border-radius:50%" alt="profile photo" src="{{ cv.photo | prepend: site.baseurl }}">
+    </td>
+    {% endif %}
+  </tr></tbody></table>
+
+  <table class="jb-inner"><tbody><tr>
+    <td style="padding:16px;width:100%;vertical-align:middle">
+      <h2>Research</h2>
+      <ul class="jb-summary">
+        {% for item in cv.summary %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    </td>
+  </tr></tbody></table>
+
+  <table class="jb-rows"><tbody>
+    {% for p in cv.publications %}
+    <tr>
+      {% if p.image %}
+      <td style="padding:16px;width:20%;vertical-align:middle"><img src="{{ p.image | prepend: site.baseurl }}" width="160" alt=""></td>
+      <td style="padding:8px;width:80%;vertical-align:middle">
+      {% else %}
+      <td style="padding:8px 16px;width:100%;vertical-align:middle">
+      {% endif %}
+        {% if p.doi %}<a href="https://doi.org/{{ p.doi }}"><span class="papertitle">{{ p.title }}</span></a>{% else %}<span class="papertitle">{{ p.title }}</span>{% endif %}
+        <br>
+        {{ p.authors }}
+        <br>
+        {% if p.venue %}<em>{{ p.venue }}</em>{% if p.status %}, {{ p.status }}{% endif %}{% elsif p.status %}<em>{{ p.status }}</em>{% endif %}{% if p.year %}, {{ p.year }}{% endif %}{% if p.note %} &nbsp;[{{ p.note }}]{% endif %}
+        {% if p.doi %}<br><a href="https://doi.org/{{ p.doi }}">doi</a>{% endif %}
+      </td>
+    </tr>
     {% endfor %}
-  </ul>
+  </tbody></table>
+
+  <table class="jb-inner"><tbody>
+    <tr>
+      <td align="center" style="padding:16px;width:20%;vertical-align:middle">
+        <div class="colored-box" style="background-color:#edd892"><h2>Talks</h2></div>
+      </td>
+      <td style="padding:8px;width:80%;vertical-align:middle">
+        {% for t in cv.presentations %}
+        {{ t.authors }} {{ t.title }}. <em>{{ t.venue }}</em>, {{ t.year }}{% unless forloop.last %}<br>{% endunless %}
+        {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding:16px;width:20%;vertical-align:middle">
+        <div class="colored-box" style="background-color:#b3dca5"><h2>Projects</h2></div>
+      </td>
+      <td style="padding:8px;width:80%;vertical-align:middle">
+        {% assign projects = site.pages | where: "category", "project" | sort: "title" %}
+        {% for pg in projects %}
+        <a href="{{ pg.url | prepend: site.baseurl }}">{{ pg.title | escape }}</a>{% unless forloop.last %}<br>{% endunless %}
+        {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding:16px;width:20%;vertical-align:middle">
+        <div class="colored-box" style="background-color:#b9d9ea"><h2>Blog</h2></div>
+      </td>
+      <td style="padding:8px;width:80%;vertical-align:middle">
+        {% for post in site.posts %}
+        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title | escape }}</a>, {{ post.date | date: "%Y" }}{% unless forloop.last %}<br>{% endunless %}
+        {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding:16px;width:20%;vertical-align:middle">
+        <div class="colored-box" style="background-color:#f5c7c7"><h2>Teaching</h2></div>
+      </td>
+      <td style="padding:8px;width:80%;vertical-align:middle">
+        {% for group in cv.experience %}{% for role in group.roles %}{% if role.title == "Graduate Student Instructor" %}
+        {{ role.title }}, {{ role.org }}, {{ role.dates }}
+        {% for b in role.bullets %}<br>{{ b }}{% endfor %}
+        {% endif %}{% endfor %}{% endfor %}
+      </td>
+    </tr>
+  </tbody></table>
+
+  <table class="jb-inner"><tbody><tr><td style="padding:0px">
+    <br>
+    <p style="text-align:right;font-size:small">
+      Website layout borrowed from <a href="https://jonbarron.info/">Jon Barron</a>'s <a href="https://github.com/jonbarron/jonbarron_website">source code</a>.
+    </p>
+  </td></tr></tbody></table>
+
+</td></tr></tbody></table>
 </div>

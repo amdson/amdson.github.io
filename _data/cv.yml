@@ -1,0 +1,173 @@
+# Content copied from Andrew_Dickson_Resume (Oct 2025). Edit here; index.html renders it.
+name: Andrew Dickson
+email: amdickson128@gmail.com
+github: amdson
+scholar:   # Google Scholar profile URL (shown in the link row when set)
+linkedin:  # LinkedIn profile URL (shown in the link row when set)
+photo:     # e.g. /assets/photo.jpg (shown top right when set)
+resume_pdf: /assets/Andrew_Dickson_Resume.pdf
+
+summary:
+  - Machine learning for protein biology and bioinformatics, including novel model architectures and data pipelines, gene ontology models, and protein sequence/function prediction at large scale.
+  - Strong coding and systems background, including HPC workflows, Linux command-line, web app development, and computational biology tools.
+  - Research in protein biophysics, biofilm modeling, agent-based simulations, and Bayesian Monte Carlo methods.
+
+education:
+  - degree: Ph.D. in Applied Science and Technology, 3.91 GPA
+    school: University of California - Berkeley
+    location: Berkeley, CA
+    dates: Aug. 2020 – Dec. 2025
+    detail: Concentrations in Machine Learning, Bioinformatics, Biophysics
+  - degree: Bachelor of Science in Electrical Engineering and Computer Science, 3.86 GPA
+    school: University of California - Berkeley
+    location: Berkeley, CA
+    dates: Aug. 2016 – May 2020
+    detail: Minor in Mechanical Engineering
+
+experience:
+  - heading: Research Experience
+    roles:
+      - title: Postdoc
+        org: United States Department of Agriculture, Taner Sen Lab (UC Berkeley Bioengineering adjunct)
+        location: Albany, CA
+        dates: January 2026 – Present
+        bullets:
+          - Built a tractable method for efficient continued training of genomic sequence models, on highly redundant variant data
+      - title: Graduate Student Researcher
+        org: University of California - Berkeley
+        location: Berkeley, CA
+        dates: August 2020 – August 2025
+        bullets:
+          - Architected and deployed the core infrastructure for the Go Bench universal benchmarking hub (<a href="https://gobench.org">gobench.org</a>).
+          - Developed and implemented novel machine learning algorithms for protein function annotation through embedding search, as well as for unsupervised annotation attribution for interpretability.
+          - Gigabyte-scale computational analysis of the FG-Nucleoporin protein family
+          - Mentored 4 Fung Masters students towards a graduate thesis on interpretable protein function annotation.
+          - Designed and implemented GPU accelerated physics and reaction-diffusion dynamics for agent-based model of biofilm growth within the human gut microbiome.
+      - title: Student Intern
+        org: United States Department of Agriculture
+        location: Albany, CA
+        dates: August 2023 – November 2023
+        bullets:
+          - Developed interactive website for design and validation of STARP PCR primers using Flask API and HTML/Javascript frontend.
+          - Designed and developed BLAST backend for selective filtration of multiply associative PCR primers.
+          - Designed custom Redis/Celery based backend for asynchronous handling of computationally intensive requests.
+  - heading: Industry &amp; Teaching Experience
+    roles:
+      - title: Software Developer
+        org: Stottler Henke Associates, Inc.
+        location: San Mateo, CA
+        dates: May 2020 – August 2020
+        bullets:
+          - Designed and implemented A* variant for multiple entity routing in real-world environments
+          - Developed machine learning protocol for categorizing bacteria from hyperspectral images using ResNet architecture
+      - title: Educational Writer
+        org: Brilliant.org
+        location: Berkeley, CA
+        dates: May 2016 – August 2019
+        bullets:
+          - Wrote nine chapters in the Brilliant.org machine learning curriculum including those on Support Vector Machines, Linear and Tree Regression, PCA, ICA, Expectation-Maximization, and Cross-Validation, with over 100,000 readers
+          - Designed cryptography inspired curriculum for novice Python students
+          - Rewrote computer science course on algorithms and data structures for correctness and clarity
+      - title: Graduate Student Instructor
+        org: University of California - Berkeley
+        location: Berkeley, CA
+        dates: January 2020 – June 2025
+        bullets:
+          - Developed homework, exam, and review material for Bioengineering 102 materials science course, receiving Department of Bioengineering Outstanding GSI Award
+          - Six semesters teaching communicative writing for engineers with the Berkeley Fung Masters program
+
+publications:
+  - authors: Peyro M, Soheilypour M, Nibber VS, <strong>Dickson AM</strong>, Mofrad MRK.
+    title: FG nucleoporins feature unique patterns that distinguish them from other IDPs.
+    venue: Biophys J
+    year: 2021
+    doi: 10.1016/j.bpj.2021.06.031
+  - authors: Peyro M, <strong>Dickson A.</strong>, Mofrad MRK.
+    title: Nucleoporins’ exclusive amino acid sequence features regulate their transient interaction with and selectivity of cargo complexes in the nuclear pore.
+    venue: Mol. Bio. of the Cell
+    year: 2021
+    doi: 10.1091/mbc.E21-04-0161
+  - authors: <strong>Dickson A.</strong>, Asgari E, et. al.
+    title: "Go Bench: Shared-Hub for Universal Benchmarking of Machine Learning-Based Protein Functional Annotations."
+    venue: Bioinformatics
+    year: 2022
+    doi: 10.1093/bioinformatics/btad081
+  - authors: <strong>Dickson A</strong>, Mofrad MRK.
+    title: Fine-tuning protein embeddings for functional similarity evaluation.
+    venue: Bioinformatics
+    year: 2023
+    doi: 10.1093/bioinformatics/btae445
+  - authors: Valiei A, <strong>Dickson A.</strong>, Mofrad MRK, Amanian-D J.
+    title: Metabolic interactions shape emergent biofilm structures in a conceptual model of gut mucosal bacterial communities.
+    venue: npj Biofilms and Microbiomes
+    year: 2024
+    doi: 10.1038/s41522-024-00572-y
+  - authors: Parsa M., Aminian-D. J. <strong>Dickson A.</strong>, Mofrad MRK
+    title: "SIMBA-GNN: Simulation-augmented Microbiome Abundance Graph Neural Network."
+    venue: npj Systems Biology and Applications
+    year: 2025
+    doi: 10.1101/2025.05.27.656377
+  - authors: Amanian-D J., <strong>Dickson A.*</strong>, et. al.
+    title: "MetaBiome: a multiscale model integrating agent-based and metabolic networks to reveal spatial regulation in gut mucosal microbial communities."
+    venue: mSystems
+    year: 2025
+    doi: 10.1128/msystems.01652-24
+    note: "*Co-First Author"
+  - authors: <strong>Dickson A.</strong>, Mouline, S, Mofrad MRK
+    title: Residue-level Protein Function Prediction with Interpretability Methods.
+    venue: Bioinformatics
+    status: in press
+  - authors: <strong>Dickson A.</strong>, Mofrad MRK, Amanian-D J.
+    title: Bacteria-host interactions determine ecological outcomes in gut mucosal community models.
+    year: 2026
+    status: Manuscript submitted for publication
+  - authors: Long Y., <strong>Dickson A.*</strong>, et. al.
+    title: "STARP Primer: a web-based program of primer design for flexibly genotyping individual single nucleotide polymorphisms."
+    year: 2026
+    status: Manuscript submitted for publication
+    note: "*Co-First Author"
+  - authors: <strong>Dickson AM</strong>, Bhatt M, Yu T, Mofrad MRK.
+    title: Forecasting the future of American mass shootings with Bayesian agent-based model calibration.
+    venue: PNAS Nexus
+    year: 2026
+    doi: 10.1093/pnasnexus/pgag294
+  - authors: <strong>Dickson A</strong>, Mofrad MRK.
+    title: Coupling Genome-Scale Representations with Generative Modeling for the Gut Microbiome.
+    venue: Springer
+    year: 2025
+
+presentations:
+  - authors: Asgari E., <strong>Dickson A.</strong>, et. al
+    title: Fine-tuning of Language Model-Based Representation for Protein Functional Annotation
+    venue: Intelligent Systems for Molecular Biology
+    year: 2020
+  - authors: <strong>Dickson A.</strong>, Asgari E., et. al
+    title: "GO Bench: Shared-hub for Universal Benchmarking of Machine Learning-Based Protein Functional Annotations"
+    venue: Intelligent Systems for Molecular Biology
+    year: 2022
+  - authors: <strong>Dickson A.</strong>, Mofrad MRK
+    title: Fine-tuning Protein Embeddings for Generalizable Protein Annotation
+    venue: Bioengineering Institute of California
+    year: 2023
+  - authors: <strong>Dickson A.</strong>, Valiei A, Mofrad MRK,
+    title: Agent Based Modeling of Invasion Scenarios in the Gut Microbiome
+    venue: Biomedical Engineering Society
+    year: 2024
+  - authors: Mouline, S, <strong>Dickson A.</strong>, Mofrad MRK,
+    title: "Identifying Functionally Important Residues: BERT Entropy and Interpretability Applied to Protein Function Prediction"
+    venue: Biomedical Engineering Society
+    year: 2024
+
+skills:
+  - label: Languages
+    items: Python, C/C++, Java, JavaScript, R, Matlab, Taichi, SQL, HTML/CSS
+  - label: ML &amp; HPC
+    items: PyTorch, JAX, Lightning, HuggingFace, CUDA, SLURM, Weights &amp; Biases, ONNX, TensorFlow, AWS
+  - label: Scientific Computing
+    items: NumPy, SciPy, Scikit-Learn, Pandas, Polars, FAISS, PyMC, BioPython
+  - label: Bioinformatics
+    items: MMseqs2, BLAST, HMMER, MUSCLE/MAFFT, BEAST, MEGA, PyMOL, VMD, UniProt, Pfam, InterPro, Gene Ontology
+  - label: Web &amp; Infrastructure
+    items: Flask, Django, Celery, Redis, Nginx, React, Node.js, Docker, Git
+  - label: Other
+    items: Inkscape, Adobe Illustrator, COMSOL, SolidWorks
