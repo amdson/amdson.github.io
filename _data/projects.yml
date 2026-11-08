@@ -1,0 +1,23 @@
+# Projects dropdown in the site header. Order is display order.
+- title: MTile
+  url: /mtile/
+- title: kMC Crystal Simulator
+  url: /docs/index.html
+- title: Gut biofilm agent-based model
+  url: https://github.com/amdson/mb_abm
+- title: GO Bench
+  url: https://gobench.org
+- title: Function-conditioned protein language models
+  url: https://github.com/amdson/go_interp
+- title: Sparse variant cache
+  url: https://github.com/amdson/mutant_cache
+- title: Calibrated Response
+  url: https://github.com/amdson/calibrated_response
+- title: STARP Primer
+  url: https://github.com/amdson/starp
+- title: Which Side of the Airplane is Sunniest?
+  url: /airplane_sun
+- title: Oceanview
+  url: /oceanview
+- title: RTCPvP
+  url: /rtcpvp

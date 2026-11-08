@@ -35,13 +35,12 @@
         {% endfor %}
 
         <div class="dropdown">
-          <a class="page-link dropdown-toggle" href="#">Projects</a>
+          <a class="page-link dropdown-toggle" href="{{ '/projects/' | prepend: site.baseurl }}">Projects</a>
           <ul class="dropdown-menu">
-            {% for my_page in site.pages %}
-              {% if my_page.category == "project" %}
-                <li><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title | escape }}</a></li>
-              {% endif %}
+            {% for proj in site.data.projects %}
+              <li><a href="{% if proj.url contains '://' %}{{ proj.url }}{% else %}{{ proj.url | prepend: site.baseurl }}{% endif %}">{{ proj.title | escape }}</a></li>
             {% endfor %}
+            <li class="dropdown-all"><a href="{{ '/projects/' | prepend: site.baseurl }}">All projects</a></li>
           </ul>
         </div>
       </div>

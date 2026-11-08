@@ -16,6 +16,7 @@ layout: default
       <p style="text-align:center">
         <a href="mailto:{{ cv.email }}">Email</a> &nbsp;/&nbsp;
         <a href="{{ cv.resume_pdf | prepend: site.baseurl }}">CV</a> &nbsp;/&nbsp;
+        <a href="{{ '/projects/' | prepend: site.baseurl }}">Projects</a> &nbsp;/&nbsp;
         {% if cv.scholar %}<a href="{{ cv.scholar }}">Scholar</a> &nbsp;/&nbsp;{% endif %}
         {% if cv.linkedin %}<a href="{{ cv.linkedin }}">LinkedIn</a> &nbsp;/&nbsp;{% endif %}
         <a href="https://github.com/{{ cv.github }}/">Github</a>
