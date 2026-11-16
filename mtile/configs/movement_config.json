@@ -3,26 +3,15 @@
   "ParkourEnabled": false,
   // options: "full" | "redirect-traction" | "legs-only"  (hot-reloads while running)
   "CorrectorScenario": "full",
-  // Stand-fold engine: "qp" (linearized channel solve) | "ref" (terrain-
-  // generated carry reference + PathDeform + servo) | "lattice" (the ref
-  // tail riding the lattice path DP's reference; Lattice* knobs below) |
-  // "lm" (nonlinear oracle, heavy). Hot-reloads — flip mid-game to A/B.
-  "FoldEngine": "lattice",
-  "FoldLmIterations": 12,
-  "FoldLmPenWeight": 10,
-  "FoldLmHoverWeight": 0.5,
-  "FoldLmProgressWeight": 0.2,
-  "FoldLmEffortWeight": 0.02,
-  "FoldLmMaxForce": 8000,
   // Fold tuning surface (see MovementConfig for each knob's role) — hot-reloads.
   "FoldHoverOffset": 14.8,
   "CrouchHoverOffset": 0,
   "FoldClimbReachUp": 20,
-  "CrouchClimbReachUp": 4,
-  "FoldDuckReach": 16,
   "FoldIterations": 16,
   "FoldLegForce": 6000,
   "FoldDriveForce": 3000,
+  "SlipDriveForce": 400,
+  "SlipFriction": 400,
   "FoldCornerForce": 1500,
   "FoldTuckForce": 3600,
   "FoldRedirectForce": 1500,
@@ -32,30 +21,35 @@
   "FoldContactPushForce": 1000,
   // Horizontal locomotion scaled x0.8 on 2026-10-19 (slow movement ~20%) — see the
   // note atop MovementConfig.cs. Values mirror the code defaults (ConfigLayoutTests).
-  "AirAccel": 1200,
-  "MaxAirSpeed": 120,
-  "AirDrag": 400,
+  "AirAccel": 900,
+  "MaxAirSpeed": 54,
+  "CorrectorAirSpeed": 90,
+  "FallGravityScale": 0.7,
+  "AirDrag": 300,
   "QuadraticAirDrag": 0.0005,
-  "JumpVelocity": -100,
-  "JumpHoldForce": -1500,
+  "JumpVelocity": -87.5,
+  "JumpHoldForce": -1312.5,
   "JumpInitForce": 0,
   "MaxJumpHoldTime": 0.12,
+  "JumpPushForce": 7500,
+  "JumpTopSpeed": 145,
+  "RunJumpEntrySpeed": 57,
   "SlideTerminalSpeed": 32,
   "SlideDrag": 300,
-  "WallJumpInitialVelX": 200,
-  "WallJumpInitialVelY": -150,
-  "WallJumpAirAccel": 1200,
-  "WallJumpMaxAirSpeed": 120,
-  "WallJumpAirDrag": 400,
-  "WallJumpHoldForce": -1000,
+  "WallJumpInitialVelX": 150,
+  "WallJumpInitialVelY": -131.25,
+  "WallJumpAirAccel": 900,
+  "WallJumpMaxAirSpeed": 90,
+  "WallJumpAirDrag": 300,
+  "WallJumpHoldForce": -875,
   "WallJumpMaxHoldTime": 0.12,
   "SpringK": 300,
-  "WalkAccel": 2400,
-  "MaxWalkSpeed": 80,
-  "CrouchMaxWalkSpeed": 40,
-  "RunJumpMinSpeed": 64,
-  "ArcJumpRunSpeed": 40,
-  "MantleMaxEntrySpeed": 48,
+  "WalkAccel": 1800,
+  "MaxWalkSpeed": 60,
+  "CrouchMaxWalkSpeed": 30,
+  "RunJumpMinSpeed": 48,
+  "ArcJumpRunSpeed": 30,
+  "MantleMaxEntrySpeed": 36,
   "FastSlideTerminalSpeed": 160,
   // Block peel (Shift+LMB grab) — see MovementConfig for each knob's role. Hot-reloads.
   // false restores the legacy one-frame drag-rip.
@@ -77,8 +71,8 @@
   "PeelWeightDirt": 1.5,
   "PeelWeightSand": 0.8,
   "PeelWeightFoam": 0.4,
-  // Carried orb bleeds to nothing over this many seconds.
-  "GrabDissipateSeconds": 2.0,
+  // Carried orb bleeds to nothing over this many seconds (8: buffed 4x from 2, 2026-11-04).
+  "GrabDissipateSeconds": 8.0,
   // Block throw (Plans/BLOCK_THROW_PLAN.md §5): held reach (clod follows the cursor out
   // to this many px from the body), ball tracker, detach.
   "GrabHoldReach": 64,
@@ -88,5 +82,19 @@
   "GrabCatchSpeed": 40,
   "GrabChaseMaxSeconds": 0.25,
   "GrabSwipeSmoothing": 0.35,
-  "GrabPointMaxSeconds": 0.25
+  "GrabPointMaxSeconds": 0.25,
+  // Launch decay (Physics/Launch.cs), px/s² on top of gravity + drag. Coast distance
+  // from speed v is v²/(2·decay). 0 = off (plain knockback velocity).
+  "WhipKickLaunchDecay": 400,
+  "ThrowLaunchDecay": 1500,
+  "ThrowLaunchBounce": 0.7,
+  // Stab striker: heavy + slow ⇒ target Δv → (1+e)·speed, a built-in cap. Speed must
+  // stay above ~215 to keep stunning (dv line 210). Launch: low decay, 4× wall-break mass.
+  "StabStrikeSpeed": 380,
+  "StabStrikeMassScale": 8,
+  "StabRestitution": 0.1,
+  "StabMinLaunch": 60,
+  "StabLaunchDecay": 100,
+  "StabLaunchImpactMass": 4,
+  "StabLaunchBounce": 0.4
 }
