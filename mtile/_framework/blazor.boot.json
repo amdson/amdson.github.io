@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MTile.Web",
   "resources": {
-    "hash": "sha256-zP/MmM4F09aOsumxXcJVeel3QDMI9sqgvIeIJT3T6kQ=",
+    "hash": "sha256-paXuUmISFAf5Txhn6lqtkIre52hDHm/nkDxTvpIMIIY=",
     "jsModuleNative": {
       "dotnet.native.8.0.30.dq4mcfmpm2.js": "sha256-/vcfaQdiiqz2OXYbCQKA0lRi6L2XZnTjf70WkZTdj2E="
     },
@@ -9,7 +9,7 @@
       "dotnet.runtime.8.0.30.8j5co2cpzw.js": "sha256-Iz92tEdLDz6hULg8toBVTeVi4QRnFEbFBy3lo3dbmEw="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-HpfVOqrF+OXNHtYpcEIZ+VNEQS9xf38+zdAUPbIqx+M="
+      "dotnet.native.wasm": "sha256-2g4sv+MVIZP7/JW/TStNy95y9ks7lEg7xqsN2XzrQRU="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -18,7 +18,7 @@
     },
     "assembly": {
       "Kni.Platform.wasm": "sha256-IFaAafIlY7SyZOvPkh7c+YyN0BbbGnGkOkkUloErTRg=",
-      "Microsoft.AspNetCore.Components.wasm": "sha256-ixncEVIEmQTvxsiuKVy1HiMZvzC+71GENUcTe2Jah5g=",
+      "Microsoft.AspNetCore.Components.wasm": "sha256-CUNz2KhzdApLcZLQHsUDYH1y+r5bInPJl/hKJPSwCUs=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-FE67YsiQ/Irg18hlNe2QV3GDAXAgHWCTghXVy8ILpkc=",
       "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-mq9Bf+1fRF6YC/ro2NPxtoh+szT1wSIzMzJ6FpNjYu8=",
       "Microsoft.Extensions.Configuration.Abstractions.wasm": "sha256-87sn2TYqgdZ95sXmavjKEzoEfMgHnYQ9LOvnMX+aZcI=",
@@ -32,7 +32,7 @@
       "Microsoft.Extensions.Primitives.wasm": "sha256-6187ynEahDlSLMBvD4vAmiLpZ3clRb5xu6rM7O8AxNo=",
       "Microsoft.JSInterop.wasm": "sha256-r9dkR5134QvSR5zRWncgwA3QgGc2mbiRwhPteP2xbpk=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-vXbrJxN/hJ4fcUDVzXW+XhXQrPJExVIZ5uQbSKQLnsQ=",
-      "MTile.Web.wasm": "sha256-RG1tgsOrv6OnRAT3C8ifVzMENC/UwudV8yKCVZlhnVs=",
+      "MTile.Web.wasm": "sha256-lvycoTd+ywPsjYH3Xk4B0+pOudyCOygfEn+jOyo8jTk=",
       "nkast.Wasm.Audio.wasm": "sha256-KGwlNNGEYXve6o+MRBpViVuKmN6TJpYltOiJIjGOo6I=",
       "nkast.Wasm.Canvas.wasm": "sha256-C4hW1Iqj6tdYQ7x3s2Mbo0B6t7vd8LPIuE+3UNYrjaI=",
       "nkast.Wasm.Dom.wasm": "sha256-l4hf03MQb1wsk5N8TA7XxbsmxZqtsEf1zYGI1vg7cIg=",
